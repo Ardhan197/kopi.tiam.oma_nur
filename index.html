@@ -1118,7 +1118,10 @@
                 });
                 tbody.innerHTML = `<tr><td colspan="5" class="p-8 text-center text-red-500/80 italic text-sm">Menunggu koneksi data yang valid dari server...</td></tr>`;
             } finally {
-                if(iconRefresh) iconRefresh.classList.remove('animate-spin');
+                // Perbaikan: Mengambil ulang DOM element ikon setelah lucide.createIcons() merendernya ulang
+                const currentIconRefresh = document.getElementById('icon-refresh');
+                if(currentIconRefresh) currentIconRefresh.classList.remove('animate-spin');
+                
                 refreshStatus.classList.add('hidden');
                 updateCursorElements(); // re-init hover effects untuk baris tabel baru
             }
