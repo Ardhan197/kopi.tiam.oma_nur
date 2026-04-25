@@ -273,6 +273,7 @@
                     <span class="text-luxury-gold text-sm tracking-[0.3em] uppercase block mb-4">Koleksi Signature</span>
                     <h2 class="text-4xl md:text-6xl font-bold text-luxury-cream font-serif mb-6">Menu Eksklusif</h2>
                     <p class="text-luxury-muted max-w-2xl mx-auto font-light text-lg">Setiap hidangan adalah mahakarya, diramu oleh *Master Barista* dengan takaran emas untuk rasa yang presisi.</p>
+                    <p class="text-luxury-gold text-xs mt-4 italic opacity-70">Menu & Gambar diperbarui langsung dari Database.</p>
                 </div>
 
                 <div class="flex flex-wrap justify-center gap-4 mb-16" data-aos="fade-up" data-aos-delay="100">
@@ -282,119 +283,11 @@
                     <button class="filter-btn interactive-element bg-transparent text-luxury-cream border border-luxury-border hover:border-luxury-gold px-8 py-3 rounded-full text-sm font-semibold tracking-widest uppercase transition-all" data-filter="camilan">Patisserie</button>
                 </div>
 
+                <!-- DATA MENU AKAN DI RENDER DISINI DARI GOOGLE SHEETS -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10" id="menu-grid">
-                    <div class="menu-item kopi bg-luxury-card rounded-2xl overflow-hidden border border-luxury-border group interactive-element" 
-                        data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.1" 
-                        data-aos="fade-up" data-aos-delay="100">
-                        <div class="overflow-hidden relative">
-                            <img src="https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?auto=format&fit=crop&q=80&w=600" alt="Espresso" class="w-full h-56 object-cover transition-transform duration-1000 group-hover:scale-110">
-                            <div class="absolute inset-0 bg-gradient-to-t from-luxury-card to-transparent opacity-80"></div>
-                        </div>
-                        <div class="p-8 relative -mt-10">
-                            <div class="absolute -top-6 right-8 bg-black border border-luxury-gold text-luxury-gold w-14 h-14 flex items-center justify-center rounded-full shadow-[0_0_20px_rgba(212,175,55,0.2)]">
-                                <i data-lucide="coffee" class="w-6 h-6"></i>
-                            </div>
-                            <div class="flex justify-between items-end mb-4">
-                                <h3 class="text-2xl font-bold font-serif text-luxury-cream">Classic Espresso</h3>
-                                <span class="text-luxury-gold font-medium tracking-wider">Rp 45k</span>
-                            </div>
-                            <p class="text-luxury-muted font-light text-sm leading-relaxed">Ekstraksi murni biji kopi arabika pilihan dengan crema emas tebal dan profil rasa kompleks.</p>
-                        </div>
-                    </div>
-
-                    <div class="menu-item kopi bg-luxury-card rounded-2xl overflow-hidden border border-luxury-border group interactive-element" 
-                        data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.1" 
-                        data-aos="fade-up" data-aos-delay="200">
-                        <div class="overflow-hidden relative">
-                            <img src="https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?auto=format&fit=crop&q=80&w=600" alt="Latte Art" class="w-full h-56 object-cover transition-transform duration-1000 group-hover:scale-110">
-                            <div class="absolute inset-0 bg-gradient-to-t from-luxury-card to-transparent opacity-80"></div>
-                        </div>
-                        <div class="p-8 relative -mt-10">
-                            <div class="absolute -top-6 right-8 bg-black border border-luxury-gold text-luxury-gold w-14 h-14 flex items-center justify-center rounded-full shadow-[0_0_20px_rgba(212,175,55,0.2)]">
-                                <i data-lucide="coffee" class="w-6 h-6"></i>
-                            </div>
-                            <div class="flex justify-between items-end mb-4">
-                                <h3 class="text-2xl font-bold font-serif text-luxury-cream">oMa NUR Latte</h3>
-                                <span class="text-luxury-gold font-medium tracking-wider">Rp 55k</span>
-                            </div>
-                            <p class="text-luxury-muted font-light text-sm leading-relaxed">Harmoni espresso pekat dengan *steamed milk* bertekstur sutra (*silky microfoam*).</p>
-                        </div>
-                    </div>
-
-                    <div class="menu-item kopi bg-luxury-card rounded-2xl overflow-hidden border border-luxury-border group interactive-element" 
-                        data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.1" 
-                        data-aos="fade-up" data-aos-delay="300">
-                        <div class="overflow-hidden relative">
-                            <img src="https://images.unsplash.com/photo-1498804103079-a6351b050096?auto=format&fit=crop&q=80&w=600" alt="V60" class="w-full h-56 object-cover transition-transform duration-1000 group-hover:scale-110">
-                            <div class="absolute inset-0 bg-gradient-to-t from-luxury-card to-transparent opacity-80"></div>
-                        </div>
-                        <div class="p-8 relative -mt-10">
-                            <div class="absolute -top-6 right-8 bg-black border border-luxury-gold text-luxury-gold w-14 h-14 flex items-center justify-center rounded-full shadow-[0_0_20px_rgba(212,175,55,0.2)]">
-                                <i data-lucide="coffee" class="w-6 h-6"></i>
-                            </div>
-                            <div class="flex justify-between items-end mb-4">
-                                <h3 class="text-2xl font-bold font-serif text-luxury-cream">V60 Pour Over</h3>
-                                <span class="text-luxury-gold font-medium tracking-wider">Rp 60k</span>
-                            </div>
-                            <p class="text-luxury-muted font-light text-sm leading-relaxed">Metode seduh manual elegan menonjolkan aroma floral dan *fruity* dari biji kopi *single origin*.</p>
-                        </div>
-                    </div>
-
-                    <div class="menu-item non-kopi bg-luxury-card rounded-2xl overflow-hidden border border-luxury-border group interactive-element" 
-                        data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.1" 
-                        data-aos="fade-up" data-aos-delay="100">
-                        <div class="overflow-hidden relative">
-                            <img src="https://images.unsplash.com/photo-1582787042010-0eb51e5e2e8e?auto=format&fit=crop&q=80&w=600" alt="Matcha" class="w-full h-56 object-cover transition-transform duration-1000 group-hover:scale-110">
-                            <div class="absolute inset-0 bg-gradient-to-t from-luxury-card to-transparent opacity-80"></div>
-                        </div>
-                        <div class="p-8 relative -mt-10">
-                            <div class="absolute -top-6 right-8 bg-black border border-green-500 text-green-500 w-14 h-14 flex items-center justify-center rounded-full shadow-[0_0_20px_rgba(34,197,94,0.2)]">
-                                <i data-lucide="leaf" class="w-6 h-6"></i>
-                            </div>
-                            <div class="flex justify-between items-end mb-4">
-                                <h3 class="text-2xl font-bold font-serif text-luxury-cream">Kyoto Matcha</h3>
-                                <span class="text-luxury-gold font-medium tracking-wider">Rp 65k</span>
-                            </div>
-                            <p class="text-luxury-muted font-light text-sm leading-relaxed">Bubuk teh hijau *Ceremonial Grade* asli Uji, Jepang yang dikocok sempurna dengan susu nabati.</p>
-                        </div>
-                    </div>
-
-                    <div class="menu-item camilan bg-luxury-card rounded-2xl overflow-hidden border border-luxury-border group interactive-element" 
-                        data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.1" 
-                        data-aos="fade-up" data-aos-delay="200">
-                        <div class="overflow-hidden relative">
-                            <img src="https://images.unsplash.com/photo-1555507036-ab1e4006aaeb?auto=format&fit=crop&q=80&w=600" alt="Croissant" class="w-full h-56 object-cover transition-transform duration-1000 group-hover:scale-110">
-                            <div class="absolute inset-0 bg-gradient-to-t from-luxury-card to-transparent opacity-80"></div>
-                        </div>
-                        <div class="p-8 relative -mt-10">
-                            <div class="absolute -top-6 right-8 bg-black border border-[#D4AF37] text-[#D4AF37] w-14 h-14 flex items-center justify-center rounded-full shadow-[0_0_20px_rgba(212,175,55,0.2)]">
-                                <i data-lucide="croissant" class="w-6 h-6"></i>
-                            </div>
-                            <div class="flex justify-between items-end mb-4">
-                                <h3 class="text-2xl font-bold font-serif text-luxury-cream">Truffle Croissant</h3>
-                                <span class="text-luxury-gold font-medium tracking-wider">Rp 48k</span>
-                            </div>
-                            <p class="text-luxury-muted font-light text-sm leading-relaxed">Pastry artisan mentega Prancis (*French Butter*), disajikan hangat dengan sentuhan aroma truffle.</p>
-                        </div>
-                    </div>
-
-                    <div class="menu-item camilan bg-luxury-card rounded-2xl overflow-hidden border border-luxury-border group interactive-element" 
-                        data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.1" 
-                        data-aos="fade-up" data-aos-delay="300">
-                        <div class="overflow-hidden relative">
-                            <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&q=80&w=600" alt="Brownies" class="w-full h-56 object-cover transition-transform duration-1000 group-hover:scale-110">
-                            <div class="absolute inset-0 bg-gradient-to-t from-luxury-card to-transparent opacity-80"></div>
-                        </div>
-                        <div class="p-8 relative -mt-10">
-                            <div class="absolute -top-6 right-8 bg-black border border-[#D4AF37] text-[#D4AF37] w-14 h-14 flex items-center justify-center rounded-full shadow-[0_0_20px_rgba(212,175,55,0.2)]">
-                                <i data-lucide="cake-slice" class="w-6 h-6"></i>
-                            </div>
-                            <div class="flex justify-between items-end mb-4">
-                                <h3 class="text-2xl font-bold font-serif text-luxury-cream">Belgian Fudge</h3>
-                                <span class="text-luxury-gold font-medium tracking-wider">Rp 45k</span>
-                            </div>
-                            <p class="text-luxury-muted font-light text-sm leading-relaxed">Kue cokelat padat yang dibuat dari 70% *Dark Belgian Chocolate* bertabur lembaran emas murni (*Edible Gold*).</p>
-                        </div>
+                    <div class="col-span-full text-center py-12 text-luxury-muted">
+                        <i data-lucide="loader" class="w-8 h-8 animate-spin mx-auto mb-4 text-luxury-gold"></i>
+                        <p class="tracking-widest uppercase text-xs">Memuat menu eksklusif...</p>
                     </div>
                 </div>
             </div>
@@ -407,24 +300,11 @@
                     <h2 class="text-4xl md:text-6xl font-bold text-luxury-cream font-serif mb-4">Galeri KoPi tiAm oMa NUR</h2>
                 </div>
 
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-                    <div class="col-span-2 row-span-2 overflow-hidden group interactive-element" data-aos="fade-up" data-aos-delay="100">
-                        <div class="w-full h-full relative">
-                            <div class="absolute inset-0 bg-luxury-dark/20 group-hover:bg-transparent transition-colors z-10 duration-700"></div>
-                            <img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&q=80" alt="Suasana" class="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110">
-                        </div>
-                    </div>
-                    <div class="overflow-hidden group interactive-element" data-aos="fade-up" data-aos-delay="200">
-                        <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&q=80" alt="Biji Kopi" class="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110">
-                    </div>
-                    <div class="overflow-hidden group interactive-element" data-aos="fade-up" data-aos-delay="300">
-                        <img src="https://images.unsplash.com/photo-1497515114629-f71d768fd07c?auto=format&fit=crop&q=80" alt="Barista" class="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110">
-                    </div>
-                    <div class="overflow-hidden group interactive-element" data-aos="fade-up" data-aos-delay="400">
-                        <img src="https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?auto=format&fit=crop&q=80" alt="Latte" class="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110">
-                    </div>
-                    <div class="overflow-hidden group interactive-element" data-aos="fade-up" data-aos-delay="500">
-                        <img src="https://images.unsplash.com/photo-1481833761820-0509d3217039?auto=format&fit=crop&q=80" alt="Cafe Outdoor" class="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110">
+                <!-- DATA GALERI AKAN DI RENDER DISINI DARI GOOGLE SHEETS -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6" id="gallery-grid">
+                    <div class="col-span-full text-center py-12 text-luxury-muted">
+                        <i data-lucide="loader" class="w-8 h-8 animate-spin mx-auto mb-4 text-luxury-gold"></i>
+                        <p class="tracking-widest uppercase text-xs">Memuat galeri...</p>
                     </div>
                 </div>
                 
@@ -681,14 +561,14 @@
                 </div>
             </div>
 
-            <!-- FITUR BARU: PENGATURAN VISUAL / GAMBAR -->
+            <!-- PENGATURAN VISUAL / GAMBAR -->
             <div class="bg-luxury-card border border-luxury-border rounded-2xl overflow-hidden mb-12 p-6 md:p-8">
-                <h3 class="font-serif text-xl md:text-2xl text-luxury-cream mb-6">Pengaturan Tampilan (Visual)</h3>
+                <h3 class="font-serif text-xl md:text-2xl text-luxury-cream mb-6">Pengaturan Gambar Latar Utama</h3>
                 <div class="space-y-4 max-w-2xl">
                     <div>
-                        <label class="text-luxury-muted text-xs uppercase tracking-widest mb-2 block">Tautan (URL) Gambar Latar Utama / Hero</label>
+                        <label class="text-luxury-muted text-xs uppercase tracking-widest mb-2 block">Tautan (URL) Gambar Latar / Hero</label>
                         <input type="text" id="input-hero-image" class="w-full bg-transparent border-b border-luxury-border py-3 text-luxury-cream focus:border-luxury-gold transition-colors outline-none" placeholder="Masukkan link gambar (https://...)">
-                        <p class="text-[10px] text-luxury-muted mt-2">Gambar ini akan langsung mengubah latar belakang halaman awal website.</p>
+                        <p class="text-[10px] text-luxury-muted mt-2">Gambar ini akan langsung mengubah latar belakang halaman awal website. Pengaturan gambar Menu dan Galeri dilakukan langsung di tab Google Sheets Anda.</p>
                     </div>
                     <button id="btn-save-visuals" class="interactive-element px-8 py-3 bg-luxury-gold text-black rounded-full font-semibold uppercase tracking-widest text-xs transition-transform hover:scale-105 mt-4 flex items-center justify-center">
                         Simpan Visual
@@ -882,9 +762,9 @@
             }
         });
 
-        // === 7. LOGIKA FILTER MENU ===
+        // === 7. LOGIKA FILTER MENU (Update untuk elemen dinamis) ===
+        // Karena elemen dirender oleh javascript, kita butuh filter event dinamis
         const filterBtns = document.querySelectorAll('.filter-btn');
-        const menuItems = document.querySelectorAll('.menu-item');
 
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
@@ -897,6 +777,7 @@
                 btn.classList.add('bg-luxury-gold', 'text-black', 'shadow-[0_0_15px_rgba(212,175,55,0.3)]');
 
                 const filterValue = btn.getAttribute('data-filter');
+                const menuItems = document.querySelectorAll('.menu-item'); // Get current elements
 
                 menuItems.forEach(item => {
                     if (filterValue === 'all') {
@@ -919,27 +800,140 @@
         // URL GOOGLE APPS SCRIPT
         const scriptURL = 'https://script.google.com/macros/s/AKfycbwcqBMrRCunknC0PoaQmthdg1wj2C1OSP68qGwNO9lqGp_XsseMKh08g5Beb82q4CYPxA/exec'; 
 
-        // ==========================================
-        // === PENGATURAN TAMPILAN DINAMIS (VISUAL) ===
-        // ==========================================
-        async function loadVisualSettings() {
+        // ========================================================
+        // === INISIALISASI WEBSITE: TARIK SEMUA DATA DARI GOOGLE =
+        // ========================================================
+        function showMotivation() {
+            const modal = document.getElementById('motivation-modal');
+            const content = document.getElementById('motivation-content');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            content.classList.remove('scale-95');
+            content.classList.add('scale-100');
+        }
+
+        function closeMotivation() {
+            const modal = document.getElementById('motivation-modal');
+            const content = document.getElementById('motivation-content');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            content.classList.remove('scale-100');
+            content.classList.add('scale-95');
+        }
+
+        async function initializeWebsite() {
+            const visitorElement = document.getElementById('visitor-count');
+            const formData = new FormData();
+            formData.append('form_type', 'init_web');
+            
             try {
-                const formData = new FormData();
-                formData.append('form_type', 'get_visuals');
                 const response = await fetch(scriptURL, { method: 'POST', body: formData });
                 const result = await response.json();
                 
-                if (result.result === 'success' && result.hero_image) {
-                    // Update gambar latar jika ada datanya di backend
-                    document.getElementById('hero-img').src = result.hero_image;
-                    const inputAdmin = document.getElementById('input-hero-image');
-                    if(inputAdmin) inputAdmin.value = result.hero_image;
+                if(result.result === 'success') {
+                    // 1. Update Visitor Count
+                    visitorElement.textContent = result.count || "-";
+                    
+                    // 2. Munculkan Kata Motivasi
+                    if (result.motivation_active === true && result.quote) {
+                        document.getElementById('motivation-text').textContent = `"${result.quote}"`; 
+                        setTimeout(showMotivation, 500); 
+                    }
+
+                    // 3. Set Gambar Latar (Hero Image)
+                    if (result.hero_image) {
+                        document.getElementById('hero-img').src = result.hero_image;
+                        const inputAdmin = document.getElementById('input-hero-image');
+                        if (inputAdmin) inputAdmin.value = result.hero_image;
+                    }
+
+                    // 4. Render Menu dari Google Sheets
+                    const menuGrid = document.getElementById('menu-grid');
+                    if (result.menu_data && result.menu_data.length > 0) {
+                        menuGrid.innerHTML = '';
+                        result.menu_data.forEach((item, index) => {
+                            let iconName = 'coffee';
+                            let iconColor = 'text-luxury-gold';
+                            let borderColor = 'border-luxury-gold';
+                            
+                            // Normalisasi teks kategori untuk icon
+                            const cat = item.kategori.toLowerCase();
+                            if (cat.includes('non-kopi')) {
+                                iconName = 'leaf'; iconColor = 'text-green-500'; borderColor = 'border-green-500';
+                            } else if (cat.includes('camilan') || cat.includes('patisserie')) {
+                                iconName = 'croissant'; 
+                            }
+
+                            const html = `
+                                <div class="menu-item ${cat.replace(/\s+/g, '-')} bg-luxury-card rounded-2xl overflow-hidden border border-luxury-border group interactive-element" 
+                                    data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.1" 
+                                    data-aos="fade-up" data-aos-delay="${(index % 3 + 1) * 100}">
+                                    <div class="overflow-hidden relative">
+                                        <img src="${item.gambar}" alt="${item.nama}" class="w-full h-56 object-cover transition-transform duration-1000 group-hover:scale-110" onerror="this.src='https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?auto=format&fit=crop&q=80&w=600'">
+                                        <div class="absolute inset-0 bg-gradient-to-t from-luxury-card to-transparent opacity-80"></div>
+                                    </div>
+                                    <div class="p-8 relative -mt-10">
+                                        <div class="absolute -top-6 right-8 bg-black border ${borderColor} ${iconColor} w-14 h-14 flex items-center justify-center rounded-full shadow-[0_0_20px_rgba(212,175,55,0.2)]">
+                                            <i data-lucide="${iconName}" class="w-6 h-6"></i>
+                                        </div>
+                                        <div class="flex justify-between items-end mb-4">
+                                            <h3 class="text-2xl font-bold font-serif text-luxury-cream">${item.nama}</h3>
+                                            <span class="text-luxury-gold font-medium tracking-wider">${item.harga}</span>
+                                        </div>
+                                        <p class="text-luxury-muted font-light text-sm leading-relaxed">${item.deskripsi}</p>
+                                    </div>
+                                </div>
+                            `;
+                            menuGrid.innerHTML += html;
+                        });
+                    } else {
+                        menuGrid.innerHTML = `<div class="col-span-full text-center py-8 text-luxury-muted">Menu belum tersedia.</div>`;
+                    }
+
+                    // 5. Render Galeri dari Google Sheets
+                    const galleryGrid = document.getElementById('gallery-grid');
+                    if (result.gallery_data && result.gallery_data.length > 0) {
+                        galleryGrid.innerHTML = '';
+                        result.gallery_data.forEach((url, index) => {
+                            let extraClass = '';
+                            let overlay = '';
+                            if (index === 0) { // Membuat gambar pertama besar
+                                extraClass = 'col-span-2 row-span-2';
+                                overlay = '<div class="absolute inset-0 bg-luxury-dark/20 group-hover:bg-transparent transition-colors z-10 duration-700"></div>';
+                            }
+                            galleryGrid.innerHTML += `
+                                <div class="${extraClass} overflow-hidden group interactive-element" data-aos="fade-up" data-aos-delay="${(index % 4 + 1) * 100}">
+                                    <div class="w-full h-full relative">
+                                        ${overlay}
+                                        <img src="${url}" alt="Galeri" class="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110" onerror="this.src='https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&q=80'">
+                                    </div>
+                                </div>
+                            `;
+                        });
+                    } else {
+                        galleryGrid.innerHTML = `<div class="col-span-full text-center py-8 text-luxury-muted">Gambar galeri belum tersedia.</div>`;
+                    }
+
+                    // Re-init library untuk elemen baru
+                    lucide.createIcons();
+                    VanillaTilt.init(document.querySelectorAll(".menu-item"), { max: 5, speed: 400, glare: true, "max-glare": 0.1 });
+                    updateCursorElements();
+                    setTimeout(() => AOS.refresh(), 500);
+
+                } else {
+                    visitorElement.textContent = "-";
                 }
             } catch(e) {
-                console.log("Gagal memuat pengaturan visual. Menggunakan gambar bawaan.");
+                console.warn("Gagal memuat data dari server", e);
+                visitorElement.textContent = "-";
             }
         }
+        
+        // Panggil saat website load (delay agar tidak crash dgn preloader)
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(initializeWebsite, 1500);
+        });
 
+
+        // === SIMPAN VISUAL HERO IMAGE DARI ADMIN ===
         const btnSaveVisuals = document.getElementById('btn-save-visuals');
         if(btnSaveVisuals) {
             btnSaveVisuals.addEventListener('click', async () => {
@@ -959,8 +953,7 @@
                     const result = await response.json();
                     
                     if(result.result === 'success') {
-                        showToast("Visual berhasil diperbarui. Halaman akan menggunakan gambar baru.", "success");
-                        // Ganti gambar langsung tanpa reload
+                        showToast("Visual berhasil diperbarui. Latar utama web telah diganti.", "success");
                         if(heroUrl) document.getElementById('hero-img').src = heroUrl;
                     } else {
                         showToast("Gagal menyimpan visual", "error");
@@ -973,61 +966,6 @@
                 btnSaveVisuals.disabled = false;
             });
         }
-
-
-        // ==========================================
-        // === FITUR MOTIVASI HARIAN & VISITOR ===
-        // ==========================================
-        function showMotivation() {
-            const modal = document.getElementById('motivation-modal');
-            const content = document.getElementById('motivation-content');
-
-            modal.classList.remove('opacity-0', 'pointer-events-none');
-            content.classList.remove('scale-95');
-            content.classList.add('scale-100');
-        }
-
-        function closeMotivation() {
-            const modal = document.getElementById('motivation-modal');
-            const content = document.getElementById('motivation-content');
-            modal.classList.add('opacity-0', 'pointer-events-none');
-            content.classList.remove('scale-100');
-            content.classList.add('scale-95');
-        }
-
-        async function recordVisitor() {
-            const visitorElement = document.getElementById('visitor-count');
-            const formData = new FormData();
-            formData.append('form_type', 'visitor');
-            
-            try {
-                const response = await fetch(scriptURL, { method: 'POST', body: formData });
-                const result = await response.json();
-                
-                if(result.result === 'success') {
-                    visitorElement.textContent = result.count || "-";
-                    
-                    // Cek apakah motivasi aktif dan kutipan dari Google Sheets tersedia
-                    if (result.motivation_active === true && result.quote) {
-                        const textEl = document.getElementById('motivation-text');
-                        textEl.textContent = `"${result.quote}"`; // Memasukkan kutipan dinamis dari server
-                        setTimeout(showMotivation, 500); 
-                    }
-                } else {
-                    visitorElement.textContent = "-";
-                }
-            } catch(e) {
-                console.warn("Gagal memuat pengunjung", e);
-                visitorElement.textContent = "-";
-            }
-        }
-        
-        // Panggil fungsi ketika halaman sudah siap (delay 2 detik menghindari crash dgn preloader)
-        window.addEventListener('DOMContentLoaded', () => {
-            loadVisualSettings();
-            setTimeout(recordVisitor, 2000);
-        });
-        // ==========================================
 
 
         // === 8. LOGIKA RATING BINTANG & FORM ULASAN ===
@@ -1187,7 +1125,7 @@
             });
         }
 
-        // === 10. LOGIKA DASHBOARD ADMIN REALTIME ===
+        // === 10. LOGIKA DASHBOARD ADMIN ===
         const mainWebsiteContent = document.getElementById('main-website-content');
         const adminDashboard = document.getElementById('admin-dashboard');
         const logoutBtn = document.getElementById('logout-btn');
@@ -1200,8 +1138,7 @@
         const btnRefreshData = document.getElementById('btn-refresh-data');
         const refreshStatus = document.getElementById('refresh-status');
         
-        let dashboardInterval; 
-        let currentMotivationStatus = false; // Menyimpan status motivasi saat ini untuk toggle
+        let currentMotivationStatus = false; 
 
         function openModal() {
             adminModal.classList.remove('opacity-0', 'pointer-events-none');
@@ -1227,7 +1164,6 @@
             });
         }
 
-        // --- Logika Tombol Toggle Motivasi ---
         const btnToggleMotivation = document.getElementById('btn-toggle-motivation');
         if (btnToggleMotivation) {
             btnToggleMotivation.addEventListener('click', async () => {
@@ -1258,7 +1194,6 @@
             });
         }
 
-        // FUNGSI TARIK DATA DASHBOARD
         async function fetchDashboardData() {
             const tbody = document.getElementById('table-reservasi-body');
             const iconRefresh = document.getElementById('icon-refresh');
@@ -1298,13 +1233,11 @@
             }
         }
 
-        // FUNGSI RENDER DATA KE HTML & UPDATE UI SETTINGS
         function renderDashboardData(data) {
             document.getElementById('stat-total').textContent = data.totalReservasi || 0;
             document.getElementById('stat-selesai').textContent = data.totalUlasan || 0;
             document.getElementById('stat-menunggu').textContent = data.totalMenunggu || 0;
 
-            // Update UI Tombol Motivasi
             currentMotivationStatus = data.motivationActive || false;
             if (btnToggleMotivation) {
                 btnToggleMotivation.disabled = false;
