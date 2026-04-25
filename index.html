@@ -616,7 +616,7 @@
 
         <div class="max-w-7xl mx-auto px-4 py-12 md:py-20">
             <h2 class="font-serif text-3xl md:text-5xl text-luxury-cream mb-4">Selamat Datang, Pengelola</h2>
-            <p class="text-luxury-muted font-light mb-12 max-w-2xl">Pusat kendali operasional KoPi tiAm oMa NUR. Data di bawah ini tersinkronisasi otomatis dengan server.</p>
+            <p class="text-luxury-muted font-light mb-12 max-w-2xl">Pusat kendali operasional KoPi tiAm oMa NUR. Silakan klik tombol "Muat Ulang" untuk menyinkronkan data terbaru dari server.</p>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
                 <div class="bg-luxury-card border border-luxury-border p-8 rounded-2xl relative overflow-hidden">
@@ -1326,7 +1326,8 @@
                                 window.scrollTo(0,0); 
                                 
                                 fetchDashboardData();
-                                dashboardInterval = setInterval(fetchDashboardData, 30000); 
+                                // Interval auto-refresh dihapus sesuai permintaan agar tidak refresh otomatis
+                                // dashboardInterval = setInterval(fetchDashboardData, 30000); 
                                 
                                 btnSubmit.innerHTML = originalText;
                                 btnSubmit.disabled = false;
