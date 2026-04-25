@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KoPitiAm oMa NUR | Premium Experience</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        luxury: {
+                            dark: '#050404',       // Very deep rich black
+                            darker: '#0a0808',     // Slightly lighter black for depth
+                            card: '#120f0e',       // Card background
+                            gold: '#D4AF37',       // Metallic Gold
+                            goldHover: '#F3E5AB',  // Bright Gold
+                            cream: '#EAE0D5',      // Cream off-white for text
+                            muted: '#8A817C',      // Muted text
+                            border: '#D4AF3733',   // Transparent Gold for borders
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        /* Pengaturan Font Global & Base */
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background-color: #050404; 
+            color: #EAE0D5;
+            cursor: none; /* Menyembunyikan kursor bawaan untuk custom cursor */
+            overflow-x: hidden;
+        }
+        h1, h2, h3, .font-serif { font-family: 'Playfair Display', serif; }
+        
+        /* Utilitas Scrollbar (Dibuat Elegan) */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #050404; }
+        ::-webkit-scrollbar-thumb { background: #332a26; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
+        
+        /* Animasi Melayang (Floating) khas Kopi */
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+        .animate-float { animation: float 8s ease-in-out infinite; }
+        .animate-float-delayed { animation: float 9s ease-in-out infinite; animation-delay: 2s; }
+        .animate-float-slow { animation: float 12s ease-in-out infinite; animation-delay: 1s; }
+
+        /* Custom Cursor Styling */
+        #custom-cursor {
+            position: fixed;
+            top: 0; left: 0;
+            width: 24px; height: 24px;
+            border: 1px solid #D4AF37;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9999;
+            transition: width 0.3s, height 0.3s, background-color 0.3s, border-color 0.3s;
+            mix-blend-mode: difference;
+        }
+        #custom-cursor-dot {
+            position: fixed;
+            top: 0; left: 0;
+            width: 6px; height: 6px;
+            background-color: #D4AF37;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 10000;
+        }
+        /* State saat kursor mengenai link/tombol */
+        .cursor-hover #custom-cursor {
+            width: 60px; height: 60px;
+            background-color: rgba(212, 175, 55, 0.1);
+            border-color: transparent;
+            backdrop-filter: blur(2px);
+        }
+
+        /* Teks Gradasi Emas */
+        .text-gradient-gold {
+            background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        /* Preloader */
+        #preloader {
+            transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes shine {
+            100% { transform: translateX(100%) skewX(-12deg); }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-luxury-gold selection:text-black">
+
+    <div id="preloader" class="fixed inset-0 z-[1000] bg-luxury-dark flex flex-col items-center justify-center">
+        <div class="relative w-24 h-24 mb-8">
+            <div class="absolute inset-0 border-t-2 border-luxury-gold rounded-full animate-spin"></div>
+            <i data-lucide="coffee" class="absolute inset-0 m-auto w-8 h-8 text-luxury-gold animate-pulse"></i>
+        </div>
+        <h1 class="font-serif text-2xl md:text-4xl text-luxury-cream tracking-[0.2em] uppercase mb-4 text-center px-4">KoPitiAm oMa NUR</h1>
+        <p class="text-luxury-gold text-xs md:text-sm tracking-[0.5em] uppercase opacity-70">Menyeduh Kesempurnaan</p>
+    </div>
+
+    <div id="custom-cursor" class="hidden md:block"></div>
+    <div id="custom-cursor-dot" class="hidden md:block"></div>
+
+    <nav class="fixed w-full z-50 transition-all duration-500 bg-transparent py-4" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16 bg-black/40 backdrop-blur-md border border-luxury-border rounded-full px-6 md:px-10 shadow-[0_0_30px_rgba(0,0,0,0.5)]">
+                <div class="flex-shrink-0 flex items-center cursor-pointer interactive-element" onclick="window.scrollTo(0,0)">
+                    <i data-lucide="coffee" class="h-6 w-6 text-luxury-gold mr-3"></i>
+                    <span class="font-serif font-bold text-lg md:text-xl text-luxury-cream tracking-widest uppercase">KoPitiAm oMa NUR</span>
+                </div>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="#beranda" class="text-luxury-cream hover:text-luxury-gold text-sm tracking-widest uppercase transition-colors interactive-element">Beranda</a>
+                    <a href="#tentang" class="text-luxury-cream hover:text-luxury-gold text-sm tracking-widest uppercase transition-colors interactive-element">Cerita</a>
+                    <a href="#menu" class="text-luxury-cream hover:text-luxury-gold text-sm tracking-widest uppercase transition-colors interactive-element">Menu</a>
+                    <a href="#galeri" class="text-luxury-cream hover:text-luxury-gold text-sm tracking-widest uppercase transition-colors interactive-element">Galeri</a>
+                    <a href="#testimoni" class="text-luxury-cream hover:text-luxury-gold text-sm tracking-widest uppercase transition-colors interactive-element">Testimoni</a>
+                    <a href="#kontak" class="text-luxury-cream hover:text-luxury-gold text-sm tracking-widest uppercase transition-colors interactive-element">Kontak</a>
+                </div>
+
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-luxury-gold focus:outline-none interactive-element">
+                        <i data-lucide="menu" class="h-6 w-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden absolute w-full px-4 mt-2">
+            <div class="bg-luxury-card/95 backdrop-blur-xl border border-luxury-border rounded-2xl shadow-2xl px-4 pt-4 pb-6 space-y-2">
+                <a href="#beranda" class="mobile-link block px-4 py-3 rounded-xl text-sm tracking-widest uppercase text-luxury-cream hover:bg-luxury-gold/10 hover:text-luxury-gold text-center">Beranda</a>
+                <a href="#tentang" class="mobile-link block px-4 py-3 rounded-xl text-sm tracking-widest uppercase text-luxury-cream hover:bg-luxury-gold/10 hover:text-luxury-gold text-center">Cerita</a>
+                <a href="#menu" class="mobile-link block px-4 py-3 rounded-xl text-sm tracking-widest uppercase text-luxury-cream hover:bg-luxury-gold/10 hover:text-luxury-gold text-center">Menu</a>
+                <a href="#galeri" class="mobile-link block px-4 py-3 rounded-xl text-sm tracking-widest uppercase text-luxury-cream hover:bg-luxury-gold/10 hover:text-luxury-gold text-center">Galeri</a>
+                <a href="#testimoni" class="mobile-link block px-4 py-3 rounded-xl text-sm tracking-widest uppercase text-luxury-cream hover:bg-luxury-gold/10 hover:text-luxury-gold text-center">Testimoni</a>
+                <a href="#kontak" class="mobile-link block px-4 py-3 rounded-xl text-sm tracking-widest uppercase text-luxury-cream hover:bg-luxury-gold/10 hover:text-luxury-gold text-center">Kontak</a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="beranda" class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&q=80" alt="Suasana Kedai Kopi" class="w-full h-full object-cover scale-105" id="hero-img" />
+            <div class="absolute inset-0 bg-gradient-to-b from-luxury-dark/90 via-luxury-dark/70 to-luxury-dark"></div>
+        </div>
+        
+        <div class="absolute top-1/4 left-10 text-luxury-gold/10 animate-float z-0 hidden md:block">
+            <i data-lucide="coffee" class="w-32 h-32 transform -rotate-12"></i>
+        </div>
+        <div class="absolute bottom-1/4 right-10 text-luxury-gold/10 animate-float-delayed z-0 hidden md:block">
+            <i data-lucide="bean" class="w-40 h-40 transform rotate-12"></i>
+        </div>
+
+        <div class="relative z-10 text-center px-4 max-w-5xl mx-auto mt-8 md:mt-16">
+            <p data-aos="fade-up" data-aos-duration="1200" class="text-luxury-gold text-sm md:text-base tracking-[0.4em] uppercase mb-4 md:mb-6 font-medium">Pengalaman Kopi Tak Terlupakan</p>
+            <h1 data-aos="fade-up" data-aos-duration="1200" data-aos-delay="200" class="text-5xl md:text-7xl lg:text-8xl font-bold text-luxury-cream mb-4 md:mb-6 font-serif leading-[1.1]">
+                Seni <span class="italic text-gradient-gold">Kehangatan</span> <br> di Setiap Seduhan.
+            </h1>
+            <p data-aos="fade-up" data-aos-duration="1200" data-aos-delay="400" class="text-base md:text-xl text-luxury-muted mb-8 md:mb-12 max-w-2xl mx-auto font-light leading-relaxed">
+                Kopi pilihan terbaik nusantara yang disangrai dengan presisi, menghadirkan harmoni rasa dan cerita elegan di kala senja.
+            </p>
+            <div data-aos="fade-up" data-aos-duration="1200" data-aos-delay="600" class="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center">
+                <a href="#menu" class="interactive-element group relative px-10 py-4 bg-luxury-gold text-black rounded-full font-semibold uppercase tracking-wider overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-[0_0_30px_rgba(212,175,55,0.4)]">
+                    <span class="relative z-10">Eksplorasi Menu</span>
+                    <div class="absolute inset-0 h-full w-full bg-white/30 transform -skew-x-12 -translate-x-full group-hover:animate-[shine_1s_ease-in-out]"></div>
+                </a>
+                <a href="#kontak" class="interactive-element flex items-center justify-center px-10 py-4 border border-luxury-gold/50 text-luxury-cream rounded-full font-semibold uppercase tracking-wider transition-all duration-500 hover:bg-luxury-gold/10 hover:border-luxury-gold">
+                    Reservasi <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+                </a>
+            </div>
+        </div>
+        
+        <a href="#tentang" class="absolute bottom-4 md:bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center justify-center animate-bounce opacity-70 hover:opacity-100 transition-opacity interactive-element z-20">
+            <span class="text-luxury-gold text-[10px] md:text-xs tracking-[0.2em] uppercase mb-1 mr-[-0.2em]">Scroll</span>
+            <i data-lucide="chevron-down" class="w-5 h-5 md:w-6 md:h-6 text-luxury-gold"></i>
+        </a>
+    </section>
+
+    <section id="tentang" class="py-32 bg-luxury-darker relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-luxury-gold/20 to-transparent"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row items-center gap-20">
+                <div class="lg:w-1/2 relative" data-aos="fade-right" data-aos-duration="1500">
+                    <div class="absolute -inset-4 border border-luxury-gold/20 rounded-t-full rounded-b-3xl transform -rotate-3"></div>
+                    <div class="relative rounded-t-full rounded-b-3xl overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.8)]">
+                        <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80" alt="Pembuatan Kopi" class="w-full h-[600px] object-cover transition-transform duration-1000 hover:scale-110" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-luxury-dark via-transparent to-transparent"></div>
+                        <div class="absolute bottom-10 left-0 right-0 text-center">
+                            <p class="font-serif text-4xl text-luxury-gold italic">Sejak 2024</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2 space-y-8" data-aos="fade-left" data-aos-duration="1500" data-aos-delay="200">
+                    <div class="flex items-center gap-4">
+                        <div class="w-16 h-[1px] bg-luxury-gold"></div>
+                        <span class="text-luxury-gold text-sm tracking-[0.3em] uppercase">Filosofi Kami</span>
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-bold text-luxury-cream font-serif leading-tight">Sebuah Mahakarya <br> di Dalam Cangkir</h2>
+                    <div class="space-y-6 text-luxury-muted font-light text-lg leading-relaxed">
+                        <p>
+                            Berawal dari obsesi terhadap kesempurnaan biji kopi nusantara, <strong class="text-luxury-gold font-normal">KoPitiAm oMa NUR</strong> didirikan untuk mendefinisikan ulang makna bersantai. Kami mengkurasi biji kopi langsung dari petani spesialis dengan standar *Grade A*.
+                        </p>
+                        <p>
+                            Estetika ruang kami dirancang khusus oleh arsitek terkemuka, menggabungkan material kayu eboni dan pencahayaan temaram, menciptakan sebuah oasis kemewahan di tengah hingar-bingar kota metropolitan.
+                        </p>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-10 pt-10 border-t border-luxury-border">
+                        <div data-aos="fade-up" data-aos-delay="400">
+                            <h4 class="text-5xl font-serif font-bold text-gradient-gold mb-3">15+</h4>
+                            <p class="text-xs tracking-[0.2em] uppercase text-luxury-muted">Koleksi Single Origin</p>
+                        </div>
+                        <div data-aos="fade-up" data-aos-delay="500">
+                            <h4 class="text-5xl font-serif font-bold text-gradient-gold mb-3">10k+</h4>
+                            <p class="text-xs tracking-[0.2em] uppercase text-luxury-muted">Penikmat Setia</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="menu" class="py-32 bg-luxury-dark relative overflow-hidden">
+        <div class="absolute top-20 right-0 text-luxury-border animate-float-slow pointer-events-none hidden lg:block">
+            <i data-lucide="gem" class="w-80 h-80 -mr-20 transform rotate-12 opacity-5"></i>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="text-luxury-gold text-sm tracking-[0.3em] uppercase block mb-4">Koleksi Signature</span>
+                <h2 class="text-4xl md:text-6xl font-bold text-luxury-cream font-serif mb-6">Menu Eksklusif</h2>
+                <p class="text-luxury-muted max-w-2xl mx-auto font-light text-lg">Setiap hidangan adalah mahakarya, diramu oleh *Master Barista* dengan takaran emas untuk rasa yang presisi.</p>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-4 mb-16" data-aos="fade-up" data-aos-delay="100">
+                <button class="filter-btn active interactive-element bg-luxury-gold text-black border border-luxury-gold px-8 py-3 rounded-full text-sm font-semibold tracking-widest uppercase transition-all shadow-[0_0_15px_rgba(212,175,55,0.3)]" data-filter="all">Semua</button>
+                <button class="filter-btn interactive-element bg-transparent text-luxury-cream border border-luxury-border hover:border-luxury-gold px-8 py-3 rounded-full text-sm font-semibold tracking-widest uppercase transition-all" data-filter="kopi">Kopi</button>
+                <button class="filter-btn interactive-element bg-transparent text-luxury-cream border border-luxury-border hover:border-luxury-gold px-8 py-3 rounded-full text-sm font-semibold tracking-widest uppercase transition-all" data-filter="non-kopi">Non-Kopi</button>
+                <button class="filter-btn interactive-element bg-transparent text-luxury-cream border border-luxury-border hover:border-luxury-gold px-8 py-3 rounded-full text-sm font-semibold tracking-widest uppercase transition-all" data-filter="camilan">Patisserie</button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10" id="menu-grid">
+                <div class="menu-item kopi bg-luxury-card rounded-2xl overflow-hidden border border-luxury-border group interactive-element" 
+                     data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.1" 
+                     data-aos="fade-up" data-aos-delay="100">
+                    <div class="overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?auto=format&fit=crop&q=80&w=600" alt="Espresso" class="w-full h-56 object-cover transition-transform duration-1000 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-luxury-card to-transparent opacity-80"></div>
+                    </div>
+                    <div class="p-8 relative -mt-10">
+                        <div class="absolute -top-6 right-8 bg-black border border-luxury-gold text-luxury-gold w-14 h-14 flex items-center justify-center rounded-full shadow-[0_0_20px_rgba(212,175,55,0.2)]">
+                            <i data-lucide="coffee" class="w-6 h-6"></i>
+                        </div>
+                        <div class="flex justify-between items-end mb-4">
+                            <h3 class="text-2xl font-bold font-serif text-luxury-cream">Classic Espresso</h3>
+                            <span class="text-luxury-gold font-medium tracking-wider">Rp 45k</span>
+                        </div>
+                        <p class="text-luxury-muted font-light text-sm leading-relaxed">Ekstraksi murni biji kopi arabika pilihan dengan crema emas tebal dan profil rasa kompleks.</p>
+                    </div>
+                </div>
+
+                <div class="menu-item kopi bg-luxury-card rounded-2xl overflow-hidden border border-luxury-border group interactive-element" 
+                     data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.1" 
+                     data-aos="fade-up" data-aos-delay="200">
+                    <div class="overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?auto=format&fit=crop&q=80&w=600" alt="Latte Art" class="w-full h-56 object-cover transition-transform duration-1000 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-luxury-card to-transparent opacity-80"></div>
+                    </div>
+                    <div class="p-8 relative -mt-10">
+                        <div class="absolute -top-6 right-8 bg-black border border-luxury-gold text-luxury-gold w-14 h-14 flex items-center justify-center rounded-full shadow-[0_0_20px_rgba(212,175,55,0.2)]">
+                            <i data-lucide="coffee" class="w-6 h-6"></i>
+                        </div>
+                        <div class="flex justify-between items-end mb-4">
+                            <h3 class="text-2xl font-bold font-serif text-luxury-cream">oMa NUR Latte</h3>
+                            <span class="text-luxury-gold font-medium tracking-wider">Rp 55k</span>
+                        </div>
+                        <p class="text-luxury-muted font-light text-sm leading-relaxed">Harmoni espresso pekat dengan *steamed milk* bertekstur sutra (*silky microfoam*).</p>
+                    </div>
+                </div>
+
+                <div class="menu-item kopi bg-luxury-card rounded-2xl overflow-hidden border border-luxury-border group interactive-element" 
+                     data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.1" 
+                     data-aos="fade-up" data-aos-delay="300">
+                    <div class="overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1498804103079-a6351b050096?auto=format&fit=crop&q=80&w=600" alt="V60" class="w-full h-56 object-cover transition-transform duration-1000 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-luxury-card to-transparent opacity-80"></div>
+                    </div>
+                    <div class="p-8 relative -mt-10">
+                        <div class="absolute -top-6 right-8 bg-black border border-luxury-gold text-luxury-gold w-14 h-14 flex items-center justify-center rounded-full shadow-[0_0_20px_rgba(212,175,55,0.2)]">
+                            <i data-lucide="coffee" class="w-6 h-6"></i>
+                        </div>
+                        <div class="flex justify-between items-end mb-4">
+                            <h3 class="text-2xl font-bold font-serif text-luxury-cream">V60 Pour Over</h3>
+                            <span class="text-luxury-gold font-medium tracking-wider">Rp 60k</span>
+                        </div>
+                        <p class="text-luxury-muted font-light text-sm leading-relaxed">Metode seduh manual elegan menonjolkan aroma floral dan *fruity* dari biji kopi *single origin*.</p>
+                    </div>
+                </div>
+
+                <div class="menu-item non-kopi bg-luxury-card rounded-2xl overflow-hidden border border-luxury-border group interactive-element" 
+                     data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.1" 
+                     data-aos="fade-up" data-aos-delay="100">
+                    <div class="overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1582787042010-0eb51e5e2e8e?auto=format&fit=crop&q=80&w=600" alt="Matcha" class="w-full h-56 object-cover transition-transform duration-1000 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-luxury-card to-transparent opacity-80"></div>
+                    </div>
+                    <div class="p-8 relative -mt-10">
+                        <div class="absolute -top-6 right-8 bg-black border border-green-500 text-green-500 w-14 h-14 flex items-center justify-center rounded-full shadow-[0_0_20px_rgba(34,197,94,0.2)]">
+                            <i data-lucide="leaf" class="w-6 h-6"></i>
+                        </div>
+                        <div class="flex justify-between items-end mb-4">
+                            <h3 class="text-2xl font-bold font-serif text-luxury-cream">Kyoto Matcha</h3>
+                            <span class="text-luxury-gold font-medium tracking-wider">Rp 65k</span>
+                        </div>
+                        <p class="text-luxury-muted font-light text-sm leading-relaxed">Bubuk teh hijau *Ceremonial Grade* asli Uji, Jepang yang dikocok sempurna dengan susu nabati.</p>
+                    </div>
+                </div>
+
+                <div class="menu-item camilan bg-luxury-card rounded-2xl overflow-hidden border border-luxury-border group interactive-element" 
+                     data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.1" 
+                     data-aos="fade-up" data-aos-delay="200">
+                    <div class="overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1555507036-ab1e4006aaeb?auto=format&fit=crop&q=80&w=600" alt="Croissant" class="w-full h-56 object-cover transition-transform duration-1000 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-luxury-card to-transparent opacity-80"></div>
+                    </div>
+                    <div class="p-8 relative -mt-10">
+                        <div class="absolute -top-6 right-8 bg-black border border-[#D4AF37] text-[#D4AF37] w-14 h-14 flex items-center justify-center rounded-full shadow-[0_0_20px_rgba(212,175,55,0.2)]">
+                            <i data-lucide="croissant" class="w-6 h-6"></i>
+                        </div>
+                        <div class="flex justify-between items-end mb-4">
+                            <h3 class="text-2xl font-bold font-serif text-luxury-cream">Truffle Croissant</h3>
+                            <span class="text-luxury-gold font-medium tracking-wider">Rp 48k</span>
+                        </div>
+                        <p class="text-luxury-muted font-light text-sm leading-relaxed">Pastry artisan mentega Prancis (*French Butter*), disajikan hangat dengan sentuhan aroma truffle.</p>
+                    </div>
+                </div>
+
+                <div class="menu-item camilan bg-luxury-card rounded-2xl overflow-hidden border border-luxury-border group interactive-element" 
+                     data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.1" 
+                     data-aos="fade-up" data-aos-delay="300">
+                    <div class="overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&q=80&w=600" alt="Brownies" class="w-full h-56 object-cover transition-transform duration-1000 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-luxury-card to-transparent opacity-80"></div>
+                    </div>
+                    <div class="p-8 relative -mt-10">
+                        <div class="absolute -top-6 right-8 bg-black border border-[#D4AF37] text-[#D4AF37] w-14 h-14 flex items-center justify-center rounded-full shadow-[0_0_20px_rgba(212,175,55,0.2)]">
+                            <i data-lucide="cake-slice" class="w-6 h-6"></i>
+                        </div>
+                        <div class="flex justify-between items-end mb-4">
+                            <h3 class="text-2xl font-bold font-serif text-luxury-cream">Belgian Fudge</h3>
+                            <span class="text-luxury-gold font-medium tracking-wider">Rp 45k</span>
+                        </div>
+                        <p class="text-luxury-muted font-light text-sm leading-relaxed">Kue cokelat padat yang dibuat dari 70% *Dark Belgian Chocolate* bertabur lembaran emas murni (*Edible Gold*).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="galeri" class="py-32 bg-luxury-darker">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="text-luxury-gold text-sm tracking-[0.3em] uppercase block mb-4">Visual Kemewahan</span>
+                <h2 class="text-4xl md:text-6xl font-bold text-luxury-cream font-serif mb-4">Galeri KoPitiAm oMa NUR</h2>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+                <div class="col-span-2 row-span-2 overflow-hidden group interactive-element" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-full h-full relative">
+                        <div class="absolute inset-0 bg-luxury-dark/20 group-hover:bg-transparent transition-colors z-10 duration-700"></div>
+                        <img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&q=80" alt="Suasana" class="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110">
+                    </div>
+                </div>
+                <div class="overflow-hidden group interactive-element" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&q=80" alt="Biji Kopi" class="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110">
+                </div>
+                <div class="overflow-hidden group interactive-element" data-aos="fade-up" data-aos-delay="300">
+                    <img src="https://images.unsplash.com/photo-1497515114629-f71d768fd07c?auto=format&fit=crop&q=80" alt="Barista" class="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110">
+                </div>
+                <div class="overflow-hidden group interactive-element" data-aos="fade-up" data-aos-delay="400">
+                    <img src="https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?auto=format&fit=crop&q=80" alt="Latte" class="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110">
+                </div>
+                <div class="overflow-hidden group interactive-element" data-aos="fade-up" data-aos-delay="500">
+                    <img src="https://images.unsplash.com/photo-1481833761820-0509d3217039?auto=format&fit=crop&q=80" alt="Cafe Outdoor" class="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110">
+                </div>
+            </div>
+            
+            <div class="mt-16 text-center" data-aos="fade-up" data-aos-delay="300">
+                <a href="#" class="inline-flex items-center text-luxury-gold text-sm tracking-widest uppercase hover:text-luxury-cream transition-colors group interactive-element pb-2 border-b border-luxury-gold">
+                    Jelajahi Instagram Kami <i data-lucide="arrow-right" class="w-4 h-4 ml-2 group-hover:translate-x-2 transition-transform"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimoni" class="py-32 bg-luxury-dark relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-luxury-gold/5 to-transparent pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="text-luxury-gold text-sm tracking-[0.3em] uppercase block mb-4">Kata Mereka</span>
+                <h2 class="text-4xl md:text-5xl font-bold text-luxury-cream font-serif mb-6">Pengalaman <span class="italic text-luxury-gold">Premium</span></h2>
+                <div class="w-24 h-[1px] bg-luxury-gold mx-auto"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-luxury-card p-10 border border-luxury-border rounded-2xl relative group hover:border-luxury-gold transition-colors duration-500" data-aos="fade-up" data-aos-delay="100">
+                    <i data-lucide="quote" class="absolute top-6 right-6 w-12 h-12 text-luxury-gold/20 group-hover:text-luxury-gold/40 transition-colors"></i>
+                    <div class="flex text-luxury-gold mb-6">
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    </div>
+                    <p class="text-luxury-muted font-light leading-relaxed mb-8 italic">"Atmosfer yang ditawarkan benar-benar di luar ekspektasi. V60 Pour Over mereka memiliki *aftertaste* yang sangat *clean*. Tempat sempurna untuk *meeting* bisnis."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-luxury-darker border border-luxury-gold/50 flex items-center justify-center text-luxury-cream font-serif font-bold text-lg">A</div>
+                        <div>
+                            <h4 class="text-luxury-cream font-semibold tracking-wider">Adrian Pratama</h4>
+                            <span class="text-luxury-gold text-xs tracking-widest uppercase">Entrepreneur</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-luxury-card p-10 border border-luxury-border rounded-2xl relative group hover:border-luxury-gold transition-colors duration-500 transform md:-translate-y-4" data-aos="fade-up" data-aos-delay="200">
+                    <i data-lucide="quote" class="absolute top-6 right-6 w-12 h-12 text-luxury-gold/20 group-hover:text-luxury-gold/40 transition-colors"></i>
+                    <div class="flex text-luxury-gold mb-6">
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    </div>
+                    <p class="text-luxury-muted font-light leading-relaxed mb-8 italic">"Truffle Croissant dipadukan dengan Kyoto Matcha adalah definisi kemewahan di sore hari. Pelayanan *concierge* sangat profesional dan ramah."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-luxury-darker border border-luxury-gold/50 flex items-center justify-center text-luxury-cream font-serif font-bold text-lg">M</div>
+                        <div>
+                            <h4 class="text-luxury-cream font-semibold tracking-wider">Michelle Wong</h4>
+                            <span class="text-luxury-gold text-xs tracking-widest uppercase">Food Enthusiast</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-luxury-card p-10 border border-luxury-border rounded-2xl relative group hover:border-luxury-gold transition-colors duration-500" data-aos="fade-up" data-aos-delay="300">
+                    <i data-lucide="quote" class="absolute top-6 right-6 w-12 h-12 text-luxury-gold/20 group-hover:text-luxury-gold/40 transition-colors"></i>
+                    <div class="flex text-luxury-gold mb-6">
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    </div>
+                    <p class="text-luxury-muted font-light leading-relaxed mb-8 italic">"Desain interiornya menakjubkan. Saya melakukan reservasi *private table* untuk *anniversary* dan tim KoPitiAm oMa NUR menyiapkan segalanya dengan sempurna."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-luxury-darker border border-luxury-gold/50 flex items-center justify-center text-luxury-cream font-serif font-bold text-lg">D</div>
+                        <div>
+                            <h4 class="text-luxury-cream font-semibold tracking-wider">Dion Wiyoko</h4>
+                            <span class="text-luxury-gold text-xs tracking-widest uppercase">Architect</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="kontak" class="py-32 bg-luxury-dark text-luxury-cream relative overflow-hidden">
+        <div class="absolute inset-0 z-0 opacity-10" style="background-image: radial-gradient(#D4AF37 1px, transparent 1px); background-size: 40px 40px;"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="bg-luxury-card border border-luxury-border p-10 md:p-20 shadow-2xl">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                    
+                    <div class="space-y-10" data-aos="fade-right">
+                        <div>
+                            <span class="text-luxury-gold text-sm tracking-[0.3em] uppercase block mb-4">Hubungan Elit</span>
+                            <h2 class="text-4xl md:text-5xl font-bold font-serif mb-6">Reservasi <br> <span class="italic text-luxury-gold">Private Table</span></h2>
+                            <p class="text-luxury-muted font-light leading-relaxed">Nikmati layanan VIP tanpa antrian. Hubungi *concierge* kami untuk memesan ruang privat atau acara korporat berskala eksklusif.</p>
+                        </div>
+
+                        <div class="space-y-8">
+                            <div class="flex items-start group">
+                                <div class="p-1 mr-6">
+                                    <i data-lucide="map-pin" class="w-6 h-6 text-luxury-gold"></i>
+                                </div>
+                                <div class="border-b border-luxury-border pb-4 w-full">
+                                    <h4 class="font-serif text-xl tracking-wide mb-2 text-luxury-cream">Lokasi Butik</h4>
+                                    <p class="text-luxury-muted font-light text-sm leading-relaxed">JL. Hang Kasturi Ruko CNN Kabil,<br>BATAM, Kepulauan Riau</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start group">
+                                <div class="p-1 mr-6">
+                                    <i data-lucide="clock" class="w-6 h-6 text-luxury-gold"></i>
+                                </div>
+                                <div class="border-b border-luxury-border pb-4 w-full">
+                                    <h4 class="font-serif text-xl tracking-wide mb-2 text-luxury-cream">Jam Layanan</h4>
+                                    <p class="text-luxury-muted font-light text-sm leading-relaxed">Senin - Minggu<br><span class="text-luxury-gold font-medium">05:30 - 21:00</span> (WIB)</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start group">
+                                <div class="p-1 mr-6">
+                                    <i data-lucide="mail" class="w-6 h-6 text-luxury-gold"></i>
+                                </div>
+                                <div class="border-b border-luxury-border pb-4 w-full">
+                                    <h4 class="font-serif text-xl tracking-wide mb-2 text-luxury-cream">Korespondensi</h4>
+                                    <p class="text-luxury-muted font-light text-sm leading-relaxed">VIP Line: +62 812-3456-7890<br>Concierge: vip@kopitiamomanur.com</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div data-aos="fade-left" data-aos-delay="200" class="flex flex-col justify-center">
+                        <form id="reservasi-form" class="space-y-8">
+                            <div class="relative">
+                                <input type="text" id="nama" class="w-full bg-transparent border-b border-luxury-border py-3 text-luxury-cream placeholder-luxury-muted/50 focus:outline-none focus:border-luxury-gold transition-colors peer" required placeholder="Nama Lengkap (Sesuai KTP)">
+                            </div>
+                            <div class="relative">
+                                <input type="email" id="email" class="w-full bg-transparent border-b border-luxury-border py-3 text-luxury-cream placeholder-luxury-muted/50 focus:outline-none focus:border-luxury-gold transition-colors peer" required placeholder="Alamat Email">
+                            </div>
+                            <div class="relative">
+                                <textarea id="pesan" rows="3" class="w-full bg-transparent border-b border-luxury-border py-3 text-luxury-cream placeholder-luxury-muted/50 focus:outline-none focus:border-luxury-gold transition-colors resize-none peer" required placeholder="Tuliskan permintaan khusus Anda..."></textarea>
+                            </div>
+                            <button type="submit" class="interactive-element w-full bg-transparent border border-luxury-gold text-luxury-gold hover:bg-luxury-gold hover:text-black font-semibold tracking-widest uppercase py-4 transition-all duration-500">
+                                Kirim Permintaan
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-[#030202] text-luxury-muted py-12 border-t border-[#1a1514]">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col items-center">
+            <i data-lucide="coffee" class="h-8 w-8 text-luxury-gold mb-6"></i>
+            <span class="font-serif text-xl md:text-2xl text-luxury-cream tracking-[0.2em] uppercase mb-8 text-center">KoPitiAm oMa NUR</span>
+            
+            <div class="flex space-x-8 mb-10">
+                <a href="#" class="text-luxury-muted hover:text-luxury-gold transition-colors interactive-element"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                <a href="#" class="text-luxury-muted hover:text-luxury-gold transition-colors interactive-element"><i data-lucide="facebook" class="w-5 h-5"></i></a>
+                <a href="#" class="text-luxury-muted hover:text-luxury-gold transition-colors interactive-element"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+            </div>
+            
+            <p class="text-xs tracking-widest uppercase font-light text-center">
+                &copy; <span id="year"></span> KoPitiAm oMa NUR. Hak Cipta Dilindungi. <br> <span class="opacity-50 mt-2 block">Didesain untuk Pengalaman Premium.</span>
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script>
+        // === 1. PRELOADER LOGIC ===
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            setTimeout(() => {
+                preloader.style.opacity = '0';
+                setTimeout(() => {
+                    preloader.style.visibility = 'hidden';
+                }, 1000);
+            }, 1500); 
+        });
+
+        // === 2. SMOOTH SCROLLING (LENIS) ===
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+            mouseMultiplier: 1,
+            smoothTouch: false,
+            touchMultiplier: 2,
+            infinite: false,
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // === 3. CUSTOM CURSOR LOGIC ===
+        const cursor = document.getElementById('custom-cursor');
+        const cursorDot = document.getElementById('custom-cursor-dot');
+        const interactiveElements = document.querySelectorAll('a, button, .interactive-element');
+
+        if (window.matchMedia("(pointer: fine)").matches) {
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+                cursorDot.style.left = e.clientX + 'px';
+                cursorDot.style.top = e.clientY + 'px';
+            });
+
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseenter', () => cursor.classList.add('cursor-hover'));
+                el.addEventListener('mouseleave', () => cursor.classList.remove('cursor-hover'));
+            });
+        }
+
+        // === 4. ANIMATIONS & UI INITIALIZATION ===
+        AOS.init({
+            duration: 1000, 
+            once: true,    
+            offset: 100,    
+            easing: 'ease-out-cubic' 
+        });
+
+        lucide.createIcons();
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // === 5. MOBILE MENU LOGIC ===
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation(); 
+            menu.classList.toggle('hidden');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            if (!menu.classList.contains('hidden')) {
+                menu.classList.add('hidden');
+            }
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!menu.contains(event.target) && !btn.contains(event.target) && !menu.classList.contains('hidden')) {
+                menu.classList.add('hidden');
+            }
+        });
+
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('py-2');
+                navbar.classList.remove('py-4');
+            } else {
+                navbar.classList.add('py-4');
+                navbar.classList.remove('py-2');
+            }
+        });
+
+        // === 6. PARALLAX SEDERHANA HERO IMAGE ===
+        const heroImg = document.getElementById('hero-img');
+        window.addEventListener('scroll', () => {
+            let scrollPosition = window.pageYOffset;
+            if(scrollPosition < window.innerHeight) {
+                heroImg.style.transform = `translateY(${scrollPosition * 0.4}px) scale(1.05)`;
+            }
+        });
+
+        // === 7. FILTER MENU LOGIC ===
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const menuItems = document.querySelectorAll('.menu-item');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => {
+                    b.classList.remove('bg-luxury-gold', 'text-black', 'shadow-[0_0_15px_rgba(212,175,55,0.3)]');
+                    b.classList.add('bg-transparent', 'text-luxury-cream');
+                });
+                
+                btn.classList.remove('bg-transparent', 'text-luxury-cream');
+                btn.classList.add('bg-luxury-gold', 'text-black', 'shadow-[0_0_15px_rgba(212,175,55,0.3)]');
+
+                const filterValue = btn.getAttribute('data-filter');
+
+                menuItems.forEach(item => {
+                    if (filterValue === 'all') {
+                        item.style.display = 'block';
+                        item.style.animation = 'fadeInUp 0.6s ease forwards';
+                    } else {
+                        if (item.classList.contains(filterValue)) {
+                            item.style.display = 'block';
+                            item.style.animation = 'fadeInUp 0.6s ease forwards';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    }
+                });
+                
+                setTimeout(() => AOS.refresh(), 300);
+            });
+        });
+
+        // === 8. FORM RESERVASI (AJAX SIMULATION) ===
+        const reservasiForm = document.getElementById('reservasi-form');
+        
+        if(reservasiForm) {
+            reservasiForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const btnSubmit = this.querySelector('button[type="submit"]');
+                const originalText = btnSubmit.innerHTML;
+                
+                const nama = document.getElementById('nama').value;
+                const email = document.getElementById('email').value;
+                const pesan = document.getElementById('pesan').value;
+                
+                btnSubmit.innerHTML = `<i data-lucide="loader-2" class="w-5 h-5 mx-auto animate-spin"></i>`;
+                btnSubmit.disabled = true;
+                btnSubmit.classList.add('opacity-50', 'cursor-not-allowed');
+                lucide.createIcons(); 
+
+                try {
+                    await new Promise(resolve => setTimeout(resolve, 1500));
+                    
+                    const payload = { nama, email, pesan };
+                    console.log('Data siap dikirim ke backend:', payload);
+
+                    btnSubmit.innerHTML = `<span class="text-green-500 flex items-center justify-center gap-2"><i data-lucide="check-circle" class="w-5 h-5"></i> Terkirim</span>`;
+                    btnSubmit.classList.replace('border-luxury-gold', 'border-green-500');
+                    lucide.createIcons();
+                    
+                    this.reset();
+                    
+                    setTimeout(() => {
+                        btnSubmit.innerHTML = originalText;
+                        btnSubmit.disabled = false;
+                        btnSubmit.classList.remove('opacity-50', 'cursor-not-allowed');
+                        btnSubmit.classList.replace('border-green-500', 'border-luxury-gold');
+                    }, 3000);
+
+                } catch (error) {
+                    console.error('Terjadi kesalahan:', error);
+                    btnSubmit.innerHTML = 'Gagal Mengirim. Coba Lagi.';
+                    btnSubmit.disabled = false;
+                }
+            });
+        }
+    </script>
+</body>
+</html>
