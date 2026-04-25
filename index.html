@@ -37,7 +37,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <script src="https://unpkg.com/lucide@latest"></script>
-    
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
@@ -133,6 +132,9 @@
 
     <div id="custom-cursor" class="hidden md:block"></div>
     <div id="custom-cursor-dot" class="hidden md:block"></div>
+
+    <!-- Container untuk Toast Notifications -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-[3000] flex flex-col gap-3 pointer-events-none"></div>
 
     <!-- WRAPPER HALAMAN UTAMA -->
     <div id="main-website-content" class="transition-opacity duration-500">
@@ -584,7 +586,7 @@
                     &copy; <span id="year"></span> KoPitiAm oMa NUR. Hak Cipta Dilindungi. <br> <span class="opacity-50 mt-2 block">Didesain untuk Pengalaman Premium.</span>
                 </p>
 
-                <!-- Link Login Admin (Tersembunyi untuk Pengelola) -->
+                <!-- Link Login Admin -->
                 <button id="open-admin-btn" class="mt-8 text-luxury-muted/30 hover:text-luxury-gold text-[10px] tracking-widest uppercase transition-colors interactive-element">
                     Admin Portal
                 </button>
@@ -592,7 +594,7 @@
         </footer>
     </div> <!-- END OF MAIN WRAPPER -->
 
-    <!-- DASHBOARD ADMIN (Tersembunyi Awalnya) -->
+    <!-- DASHBOARD ADMIN -->
     <div id="admin-dashboard" class="hidden min-h-screen bg-luxury-dark text-luxury-cream transition-opacity duration-500">
         <nav class="bg-luxury-card border-b border-luxury-border py-4 px-6 md:px-10 flex justify-between items-center shadow-lg">
             <div class="flex items-center">
@@ -609,27 +611,82 @@
             <p class="text-luxury-muted font-light mb-12 max-w-2xl">Ini adalah pusat kendali operasional KoPitiAm oMa NUR. Segala data reservasi pelanggan terhubung secara *real-time* ke sistem *database* Anda.</p>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                <div class="bg-luxury-card border border-luxury-border p-8 rounded-2xl">
-                    <i data-lucide="users" class="w-8 h-8 text-luxury-gold mb-4"></i>
-                    <h3 class="text-3xl font-serif text-luxury-cream mb-1">Data Pelanggan</h3>
-                    <p class="text-luxury-muted text-sm">Lihat daftar reservasi</p>
+                <div class="bg-luxury-card border border-luxury-border p-8 rounded-2xl relative overflow-hidden">
+                    <div class="absolute -right-4 -top-4 w-24 h-24 bg-luxury-gold/5 rounded-full"></div>
+                    <i data-lucide="users" class="w-8 h-8 text-luxury-gold mb-4 relative z-10"></i>
+                    <h3 class="text-3xl font-serif text-luxury-cream mb-1 relative z-10">42</h3>
+                    <p class="text-luxury-muted text-sm relative z-10">Total Reservasi Bulan Ini</p>
                 </div>
-                <div class="bg-luxury-card border border-luxury-border p-8 rounded-2xl opacity-50">
-                    <i data-lucide="bar-chart-3" class="w-8 h-8 text-luxury-gold mb-4"></i>
-                    <h3 class="text-3xl font-serif text-luxury-cream mb-1">Statistik</h3>
-                    <p class="text-luxury-muted text-sm">Dalam pengembangan</p>
+                <div class="bg-luxury-card border border-luxury-border p-8 rounded-2xl relative overflow-hidden">
+                    <div class="absolute -right-4 -top-4 w-24 h-24 bg-green-500/5 rounded-full"></div>
+                    <i data-lucide="check-circle" class="w-8 h-8 text-green-500 mb-4 relative z-10"></i>
+                    <h3 class="text-3xl font-serif text-luxury-cream mb-1 relative z-10">38</h3>
+                    <p class="text-luxury-muted text-sm relative z-10">Reservasi Selesai</p>
                 </div>
-                <div class="bg-luxury-card border border-luxury-border p-8 rounded-2xl opacity-50">
-                    <i data-lucide="settings" class="w-8 h-8 text-luxury-gold mb-4"></i>
-                    <h3 class="text-3xl font-serif text-luxury-cream mb-1">Pengaturan</h3>
-                    <p class="text-luxury-muted text-sm">Dalam pengembangan</p>
+                <div class="bg-luxury-card border border-luxury-border p-8 rounded-2xl relative overflow-hidden">
+                    <div class="absolute -right-4 -top-4 w-24 h-24 bg-yellow-500/5 rounded-full"></div>
+                    <i data-lucide="clock-4" class="w-8 h-8 text-yellow-500 mb-4 relative z-10"></i>
+                    <h3 class="text-3xl font-serif text-luxury-cream mb-1 relative z-10">4</h3>
+                    <p class="text-luxury-muted text-sm relative z-10">Menunggu Konfirmasi</p>
                 </div>
             </div>
 
-            <div class="bg-luxury-card border border-luxury-border p-8 md:p-12 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6">
+            <!-- Tabel Reservasi Terbaru (Pengembangan UI Admin) -->
+            <div class="bg-luxury-card border border-luxury-border rounded-2xl overflow-hidden mb-12">
+                <div class="p-6 md:p-8 border-b border-luxury-border flex justify-between items-center">
+                    <h3 class="font-serif text-xl md:text-2xl text-luxury-cream">Reservasi Terbaru</h3>
+                    <button class="text-luxury-gold hover:text-luxury-goldHover text-sm uppercase tracking-widest flex items-center transition-colors">
+                        <i data-lucide="refresh-cw" class="w-4 h-4 mr-2"></i> Muat Ulang
+                    </button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-luxury-dark text-luxury-muted text-xs uppercase tracking-widest border-b border-luxury-border">
+                                <th class="p-6 font-medium">Nama Pelanggan</th>
+                                <th class="p-6 font-medium">Email</th>
+                                <th class="p-6 font-medium">Tanggal Masuk</th>
+                                <th class="p-6 font-medium">Status</th>
+                                <th class="p-6 font-medium text-right">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm">
+                            <tr class="border-b border-luxury-border hover:bg-luxury-dark/50 transition-colors">
+                                <td class="p-6 text-luxury-cream">Ahmad Fadillah</td>
+                                <td class="p-6 text-luxury-muted">ahmad.f@email.com</td>
+                                <td class="p-6 text-luxury-muted">Hari ini, 10:45</td>
+                                <td class="p-6"><span class="px-3 py-1 bg-yellow-500/10 text-yellow-500 rounded-full text-xs">Menunggu</span></td>
+                                <td class="p-6 text-right">
+                                    <button class="text-luxury-gold hover:text-white transition-colors"><i data-lucide="eye" class="w-5 h-5"></i></button>
+                                </td>
+                            </tr>
+                            <tr class="border-b border-luxury-border hover:bg-luxury-dark/50 transition-colors">
+                                <td class="p-6 text-luxury-cream">Siti Nurhaliza</td>
+                                <td class="p-6 text-luxury-muted">sitinur@email.com</td>
+                                <td class="p-6 text-luxury-muted">Kemarin, 15:20</td>
+                                <td class="p-6"><span class="px-3 py-1 bg-green-500/10 text-green-500 rounded-full text-xs">Dikonfirmasi</span></td>
+                                <td class="p-6 text-right">
+                                    <button class="text-luxury-gold hover:text-white transition-colors"><i data-lucide="eye" class="w-5 h-5"></i></button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-luxury-dark/50 transition-colors">
+                                <td class="p-6 text-luxury-cream">Budi Santoso</td>
+                                <td class="p-6 text-luxury-muted">budi.snt@email.com</td>
+                                <td class="p-6 text-luxury-muted">12 Okt 2024</td>
+                                <td class="p-6"><span class="px-3 py-1 bg-green-500/10 text-green-500 rounded-full text-xs">Dikonfirmasi</span></td>
+                                <td class="p-6 text-right">
+                                    <button class="text-luxury-gold hover:text-white transition-colors"><i data-lucide="eye" class="w-5 h-5"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="bg-luxury-darker border border-luxury-border p-8 md:p-12 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6">
                 <div>
-                    <h3 class="font-serif text-2xl text-luxury-gold mb-2">Akses *Database* Reservasi</h3>
-                    <p class="text-luxury-muted text-sm font-light">Semua data pengunjung dan pesan reservasi tersimpan aman di Google Sheets. Anda dapat memantau atau mengunduhnya di sana.</p>
+                    <h3 class="font-serif text-2xl text-luxury-gold mb-2">Akses *Database* Penuh</h3>
+                    <p class="text-luxury-muted text-sm font-light">Untuk melihat seluruh rekapitulasi data dan mengunduhnya, silakan tuju ke lembar Google Sheets master.</p>
                 </div>
                 <a href="https://docs.google.com/spreadsheets/d/1V5lxtMX8pAAUE2zfOvsWmjyOFTDNoXQGpbD-OYjd7m8/edit" target="_blank" class="interactive-element shrink-0 flex items-center px-8 py-4 bg-luxury-gold text-black rounded-full font-semibold uppercase tracking-wider transition-transform hover:scale-105">
                     Buka Google Sheets <i data-lucide="external-link" class="w-4 h-4 ml-2"></i>
@@ -656,12 +713,10 @@
                 <input type="hidden" name="form_type" value="admin_login">
                 <div class="relative">
                     <i data-lucide="user" class="absolute left-0 top-3 w-5 h-5 text-luxury-muted/50"></i>
-                    <!-- Atribut name ditambahkan untuk Google Sheets -->
                     <input type="text" id="admin-username" name="admin_username" class="w-full bg-transparent border-b border-luxury-border py-3 pl-10 text-luxury-cream placeholder-luxury-muted/50 focus:outline-none focus:border-luxury-gold transition-colors peer" required placeholder="Username">
                 </div>
                 <div class="relative">
                     <i data-lucide="key" class="absolute left-0 top-3 w-5 h-5 text-luxury-muted/50"></i>
-                    <!-- Atribut name ditambahkan untuk Google Sheets -->
                     <input type="password" id="admin-password" name="admin_password" class="w-full bg-transparent border-b border-luxury-border py-3 pl-10 text-luxury-cream placeholder-luxury-muted/50 focus:outline-none focus:border-luxury-gold transition-colors peer" required placeholder="Password">
                 </div>
                 <div id="admin-login-message" class="text-center text-sm font-medium hidden"></div>
@@ -736,6 +791,32 @@
 
         lucide.createIcons();
         document.getElementById('year').textContent = new Date().getFullYear();
+
+        // === FUNGSI CUSTOM TOAST (Pengganti Alert) ===
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            
+            const bgColor = type === 'success' ? 'bg-green-600/90 border border-green-500' : 'bg-red-600/90 border border-red-500';
+            const icon = type === 'success' ? 'check-circle' : 'alert-circle';
+            
+            toast.className = `${bgColor} backdrop-blur-md text-white px-6 py-4 rounded-xl shadow-2xl transform transition-all duration-500 translate-y-10 opacity-0 flex items-center gap-4 max-w-sm`;
+            toast.innerHTML = `<i data-lucide="${icon}" class="w-6 h-6 flex-shrink-0"></i> <span class="font-medium text-sm leading-relaxed">${message}</span>`;
+            
+            container.appendChild(toast);
+            lucide.createIcons();
+
+            // Animate in
+            requestAnimationFrame(() => {
+                toast.classList.remove('translate-y-10', 'opacity-0');
+            });
+
+            // Animate out and remove
+            setTimeout(() => {
+                toast.classList.add('translate-y-10', 'opacity-0');
+                setTimeout(() => toast.remove(), 500);
+            }, 4000);
+        }
 
         // === 5. LOGIKA MENU MOBILE ===
         const btn = document.getElementById('mobile-menu-btn');
@@ -843,10 +924,12 @@
                     const response = await fetch(scriptURL, { method: 'POST', body: formData });
                     
                     if (response.ok) {
-                        btnSubmit.innerHTML = `<span class="text-green-500 flex items-center justify-center gap-2"><i data-lucide="check-circle" class="w-5 h-5"></i> Reservasi Berhasil</span>`;
+                        btnSubmit.innerHTML = `<span class="text-green-500 flex items-center justify-center gap-2"><i data-lucide="check-circle" class="w-5 h-5"></i> Permintaan Dikirim</span>`;
                         btnSubmit.classList.replace('border-luxury-gold', 'border-green-500');
                         lucide.createIcons();
                         
+                        // Menampilkan Toast Sukses
+                        showToast("Reservasi Anda telah berhasil dikirim. Concierge kami akan segera menghubungi Anda.", "success");
                         this.reset();
                         
                         setTimeout(() => {
@@ -856,11 +939,11 @@
                             btnSubmit.classList.replace('border-green-500', 'border-luxury-gold');
                         }, 4000);
                     } else {
-                        throw new Error('Terjadi masalah dengan jaringan.');
+                        throw new Error('Terjadi masalah dengan jaringan saat mengirim formulir.');
                     }
                 } catch (error) {
                     console.error('Terjadi kesalahan:', error);
-                    alert(error.message); 
+                    showToast(error.message, "error"); // Menampilkan Toast Error
                     btnSubmit.innerHTML = 'Gagal Mengirim. Coba Lagi.';
                     btnSubmit.disabled = false;
                     btnSubmit.classList.remove('opacity-50', 'cursor-not-allowed');
@@ -912,6 +995,7 @@
                 adminDashboard.classList.add('hidden');
                 mainWebsiteContent.classList.remove('hidden');
                 window.scrollTo(0,0);
+                showToast("Anda telah keluar dari Panel Admin.", "success");
             });
         }
 
@@ -953,6 +1037,7 @@
                                 // Kembalikan form seperti semula
                                 btnSubmit.innerHTML = originalText;
                                 btnSubmit.disabled = false;
+                                showToast("Selamat datang di Panel Admin KoPitiAm oMa NUR.", "success");
                             }, 500);
                         }, 1500);
                     } else if (resultData.result === 'error_login') {
@@ -967,7 +1052,7 @@
                     }
                 } catch (error) {
                     console.error('Terjadi kesalahan:', error);
-                    adminLoginMessage.textContent = "Gagal memverifikasi data. Pastikan Google Script Anda sudah di-update.";
+                    adminLoginMessage.textContent = "Gagal memverifikasi data. Pastikan konfigurasi Google Script Anda benar.";
                     adminLoginMessage.classList.remove('hidden', 'text-green-500');
                     adminLoginMessage.classList.add('text-red-500');
                     btnSubmit.innerHTML = 'Gagal Login';
