@@ -568,11 +568,66 @@
                     <div>
                         <label class="text-luxury-muted text-xs uppercase tracking-widest mb-2 block">Tautan (URL) Gambar Latar / Hero</label>
                         <input type="text" id="input-hero-image" class="w-full bg-transparent border-b border-luxury-border py-3 text-luxury-cream focus:border-luxury-gold transition-colors outline-none" placeholder="Masukkan link gambar (https://...)">
-                        <p class="text-[10px] text-luxury-muted mt-2">Gambar ini akan langsung mengubah latar belakang halaman awal website. Pengaturan gambar Menu dan Galeri dilakukan langsung di tab Google Sheets Anda.</p>
+                        <p class="text-[10px] text-luxury-muted mt-2">Gambar ini akan langsung mengubah latar belakang halaman awal website.</p>
                     </div>
                     <button id="btn-save-visuals" class="interactive-element px-8 py-3 bg-luxury-gold text-black rounded-full font-semibold uppercase tracking-widest text-xs transition-transform hover:scale-105 mt-4 flex items-center justify-center">
                         Simpan Visual
                     </button>
+                </div>
+            </div>
+
+            <!-- MANAJEMEN KONTEN -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-12">
+                <!-- Form Tambah Menu -->
+                <div class="bg-luxury-card border border-luxury-border rounded-2xl p-6 md:p-8">
+                    <h3 class="font-serif text-xl text-luxury-cream mb-6">Tambah Menu Baru</h3>
+                    <form id="form-add-menu" class="space-y-4">
+                        <div>
+                            <label class="text-luxury-muted text-xs uppercase tracking-widest mb-1 block">Kategori</label>
+                            <select id="menu-kategori" class="w-full bg-transparent border-b border-luxury-border py-2 text-luxury-cream focus:border-luxury-gold outline-none text-sm" required>
+                                <option value="kopi" class="bg-luxury-dark text-white">Kopi</option>
+                                <option value="non-kopi" class="bg-luxury-dark text-white">Non-Kopi</option>
+                                <option value="camilan" class="bg-luxury-dark text-white">Camilan / Patisserie</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="text-luxury-muted text-xs uppercase tracking-widest mb-1 block">Nama Menu</label>
+                            <input type="text" id="menu-nama" class="w-full bg-transparent border-b border-luxury-border py-2 text-luxury-cream focus:border-luxury-gold outline-none text-sm" required>
+                        </div>
+                        <div>
+                            <label class="text-luxury-muted text-xs uppercase tracking-widest mb-1 block">Harga (ex: Rp 45k)</label>
+                            <input type="text" id="menu-harga" class="w-full bg-transparent border-b border-luxury-border py-2 text-luxury-cream focus:border-luxury-gold outline-none text-sm" required>
+                        </div>
+                        <div>
+                            <label class="text-luxury-muted text-xs uppercase tracking-widest mb-1 block">Deskripsi Singkat</label>
+                            <input type="text" id="menu-deskripsi" class="w-full bg-transparent border-b border-luxury-border py-2 text-luxury-cream focus:border-luxury-gold outline-none text-sm" required>
+                        </div>
+                        <div>
+                            <label class="text-luxury-muted text-xs uppercase tracking-widest mb-1 block">URL Gambar</label>
+                            <input type="url" id="menu-gambar" class="w-full bg-transparent border-b border-luxury-border py-2 text-luxury-cream focus:border-luxury-gold outline-none text-sm" required>
+                        </div>
+                        <button type="submit" id="btn-submit-menu" class="interactive-element w-full py-3 bg-luxury-gold text-black rounded-full font-semibold uppercase tracking-widest text-xs transition-transform hover:scale-105 mt-2 flex items-center justify-center">
+                            Tambah Menu
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Form Tambah Galeri -->
+                <div class="bg-luxury-card border border-luxury-border rounded-2xl p-6 md:p-8 flex flex-col justify-start">
+                    <h3 class="font-serif text-xl text-luxury-cream mb-6">Tambah Foto Galeri</h3>
+                    <form id="form-add-gallery" class="space-y-4">
+                        <div>
+                            <label class="text-luxury-muted text-xs uppercase tracking-widest mb-1 block">URL Gambar Galeri</label>
+                            <input type="url" id="gallery-url" class="w-full bg-transparent border-b border-luxury-border py-2 text-luxury-cream focus:border-luxury-gold outline-none text-sm" placeholder="https://..." required>
+                        </div>
+                        <button type="submit" id="btn-submit-gallery" class="interactive-element w-full py-3 bg-luxury-gold text-black rounded-full font-semibold uppercase tracking-widest text-xs transition-transform hover:scale-105 mt-2 flex items-center justify-center">
+                            Tambah ke Galeri
+                        </button>
+                    </form>
+                    <p class="text-luxury-muted text-xs mt-6 leading-relaxed bg-luxury-dark p-4 rounded-xl border border-luxury-border">
+                        <i data-lucide="info" class="w-4 h-4 inline mr-1 text-luxury-gold"></i>
+                        Untuk mengedit tulisan menu yang salah atau menghapus menu yang sudah tidak ada, silakan langsung mengeditnya melalui file <strong>Google Sheets</strong> Anda untuk kemudahan dan keamanan data.
+                    </p>
                 </div>
             </div>
             
@@ -964,6 +1019,74 @@
                 
                 btnSaveVisuals.innerHTML = originalText;
                 btnSaveVisuals.disabled = false;
+            });
+        }
+
+        // === FUNGSI TAMBAH MENU DARI ADMIN ===
+        const formAddMenu = document.getElementById('form-add-menu');
+        if (formAddMenu) {
+            formAddMenu.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const btnSubmit = document.getElementById('btn-submit-menu');
+                const originalText = btnSubmit.innerHTML;
+                btnSubmit.innerHTML = `<i data-lucide="loader" class="w-4 h-4 animate-spin inline mr-2"></i> Menyimpan...`;
+                btnSubmit.disabled = true;
+                lucide.createIcons();
+
+                const formData = new FormData();
+                formData.append('form_type', 'add_menu');
+                formData.append('kategori', document.getElementById('menu-kategori').value);
+                formData.append('nama', document.getElementById('menu-nama').value);
+                formData.append('harga', document.getElementById('menu-harga').value);
+                formData.append('deskripsi', document.getElementById('menu-deskripsi').value);
+                formData.append('gambar', document.getElementById('menu-gambar').value);
+
+                try {
+                    const response = await fetch(scriptURL, { method: 'POST', body: formData });
+                    const result = await response.json();
+                    if(result.result === 'success') {
+                        showToast("Menu baru berhasil ditambahkan!", "success");
+                        formAddMenu.reset();
+                    } else {
+                        showToast("Gagal menambahkan menu", "error");
+                    }
+                } catch(e) {
+                    showToast("Terjadi kesalahan jaringan", "error");
+                }
+                btnSubmit.innerHTML = originalText;
+                btnSubmit.disabled = false;
+            });
+        }
+
+        // === FUNGSI TAMBAH GALERI DARI ADMIN ===
+        const formAddGallery = document.getElementById('form-add-gallery');
+        if (formAddGallery) {
+            formAddGallery.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const btnSubmit = document.getElementById('btn-submit-gallery');
+                const originalText = btnSubmit.innerHTML;
+                btnSubmit.innerHTML = `<i data-lucide="loader" class="w-4 h-4 animate-spin inline mr-2"></i> Menyimpan...`;
+                btnSubmit.disabled = true;
+                lucide.createIcons();
+
+                const formData = new FormData();
+                formData.append('form_type', 'add_gallery');
+                formData.append('url', document.getElementById('gallery-url').value);
+
+                try {
+                    const response = await fetch(scriptURL, { method: 'POST', body: formData });
+                    const result = await response.json();
+                    if(result.result === 'success') {
+                        showToast("Gambar berhasil ditambahkan ke Galeri!", "success");
+                        formAddGallery.reset();
+                    } else {
+                        showToast("Gagal menambahkan galeri", "error");
+                    }
+                } catch(e) {
+                    showToast("Terjadi kesalahan jaringan", "error");
+                }
+                btnSubmit.innerHTML = originalText;
+                btnSubmit.disabled = false;
             });
         }
 
