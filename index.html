@@ -129,7 +129,6 @@
             <div class="absolute inset-0 border-t-2 border-luxury-gold rounded-full animate-spin"></div>
             <i data-lucide="coffee" class="absolute inset-0 m-auto w-8 h-8 text-luxury-gold animate-pulse"></i>
         </div>
-        <!-- Dihapus class uppercase agar besar kecilnya sesuai teks -->
         <h1 class="font-serif text-2xl md:text-4xl text-luxury-cream tracking-[0.2em] mb-4 text-center px-4">KoPi tiAm oMa NUR</h1>
         <p class="text-luxury-gold text-xs md:text-sm tracking-[0.5em] uppercase opacity-70">Menyeduh Kesempurnaan</p>
     </div>
@@ -147,7 +146,6 @@
                 <div class="flex justify-between items-center h-16 bg-black/40 backdrop-blur-md border border-luxury-border rounded-full px-6 md:px-10 shadow-[0_0_30px_rgba(0,0,0,0.5)]">
                     <div class="flex-shrink-0 flex items-center cursor-pointer interactive-element" onclick="window.scrollTo(0,0)">
                         <i data-lucide="coffee" class="h-6 w-6 text-luxury-gold mr-3"></i>
-                        <!-- Dihapus class uppercase agar besar kecilnya sesuai teks -->
                         <span class="font-serif font-bold text-lg md:text-xl text-luxury-cream tracking-widest">KoPi tiAm oMa NUR</span>
                     </div>
                     
@@ -575,7 +573,6 @@
         <footer class="bg-[#030202] text-luxury-muted py-12 border-t border-[#1a1514]">
             <div class="max-w-7xl mx-auto px-4 flex flex-col items-center">
                 <i data-lucide="coffee" class="h-8 w-8 text-luxury-gold mb-6"></i>
-                <!-- Dihapus class uppercase agar besar kecilnya sesuai teks -->
                 <span class="font-serif text-xl md:text-2xl text-luxury-cream tracking-[0.2em] mb-8 text-center">KoPi tiAm oMa NUR</span>
                 
                 <div class="flex space-x-8 mb-10">
@@ -601,8 +598,7 @@
         <nav class="bg-luxury-card border-b border-luxury-border py-4 px-6 md:px-10 flex justify-between items-center shadow-lg">
             <div class="flex items-center">
                 <i data-lucide="shield-check" class="h-6 w-6 text-luxury-gold mr-3"></i>
-                <!-- Dihapus class uppercase agar besar kecilnya sesuai teks -->
-                <span class="font-serif font-bold text-xl tracking-widest">Panel Admin KoPi tiAm oMa NUR</span>
+                <span class="font-serif font-bold text-xl tracking-widest">Panel Admin</span>
             </div>
             <div class="flex items-center gap-4">
                 <div id="refresh-status" class="text-[10px] text-luxury-muted uppercase tracking-widest flex items-center hidden">
@@ -616,7 +612,7 @@
 
         <div class="max-w-7xl mx-auto px-4 py-12 md:py-20">
             <h2 class="font-serif text-3xl md:text-5xl text-luxury-cream mb-4">Selamat Datang, Pengelola</h2>
-            <p class="text-luxury-muted font-light mb-12 max-w-2xl">Pusat kendali operasional KoPi tiAm oMa NUR. Data di bawah ini akan tersinkronisasi otomatis (Auto-refresh) dengan Google Sheets setiap 30 detik.</p>
+            <p class="text-luxury-muted font-light mb-12 max-w-2xl">Pusat kendali operasional KoPi tiAm oMa NUR. Data di bawah ini tersinkronisasi otomatis dengan server.</p>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
                 <div class="bg-luxury-card border border-luxury-border p-8 rounded-2xl relative overflow-hidden">
@@ -639,7 +635,7 @@
                 </div>
             </div>
 
-            <!-- Tabel Reservasi Terbaru (Pengembangan UI Admin) -->
+            <!-- Tabel Reservasi Terbaru -->
             <div class="bg-luxury-card border border-luxury-border rounded-2xl overflow-hidden mb-12">
                 <div class="p-6 md:p-8 border-b border-luxury-border flex justify-between items-center">
                     <h3 class="font-serif text-xl md:text-2xl text-luxury-cream">Data Terbaru dari Sistem</h3>
@@ -659,26 +655,16 @@
                             </tr>
                         </thead>
                         <tbody id="table-reservasi-body" class="text-sm">
-                            <!-- Data akan dimuat disini oleh JavaScript -->
                             <tr>
                                 <td colspan="5" class="p-8 text-center text-luxury-muted italic">
-                                    Memuat data secara realtime dari Google Sheets...
+                                    Memuat data secara realtime...
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-
-            <div class="bg-luxury-darker border border-luxury-border p-8 md:p-12 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6">
-                <div>
-                    <h3 class="font-serif text-2xl text-luxury-gold mb-2">Akses *Database* Penuh</h3>
-                    <p class="text-luxury-muted text-sm font-light">Untuk melihat seluruh rekapitulasi data, mengelola persetujuan, dan mengunduh laporan, silakan tuju ke lembar Google Sheets master.</p>
-                </div>
-                <a href="https://script.google.com/macros/s/AKfycbwcqBMrRCunknC0PoaQmthdg1wj2C1OSP68qGwNO9lqGp_XsseMKh08g5Beb82q4CYPxA/edit" target="_blank" class="interactive-element shrink-0 flex items-center px-8 py-4 bg-luxury-gold text-black rounded-full font-semibold uppercase tracking-wider transition-transform hover:scale-105">
-                    Buka Google Sheets <i data-lucide="external-link" class="w-4 h-4 ml-2"></i>
-                </a>
-            </div>
+            <!-- Bagian tombol akses Database Penuh telah dihilangkan sesuai permintaan -->
         </div>
     </div>
 
@@ -795,7 +781,7 @@
         lucide.createIcons();
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        // === FUNGSI CUSTOM TOAST (Pengganti Alert) ===
+        // === FUNGSI CUSTOM TOAST ===
         function showToast(message, type = 'success') {
             const container = document.getElementById('toast-container');
             const toast = document.createElement('div');
@@ -858,7 +844,7 @@
             }
         });
 
-        // === 6. EFEK PARALLAX SEDERHANA PADA HERO IMAGE ===
+        // === 6. EFEK PARALLAX HERO IMAGE ===
         const heroImg = document.getElementById('hero-img');
         window.addEventListener('scroll', () => {
             let scrollPosition = window.pageYOffset;
@@ -901,15 +887,14 @@
             });
         });
 
-        // URL GOOGLE APPS SCRIPT
+        // URL GOOGLE APPS SCRIPT (Silakan ganti dengan URL Deployment Anda yang baru)
         const scriptURL = 'https://script.google.com/macros/s/AKfycbwcqBMrRCunknC0PoaQmthdg1wj2C1OSP68qGwNO9lqGp_XsseMKh08g5Beb82q4CYPxA/exec'; 
 
-        // === 8. LOGIKA RATING BINTANG & FORM ULASAN (BUG FIXED) ===
+        // === 8. LOGIKA RATING BINTANG & FORM ULASAN ===
         const starBtns = document.querySelectorAll('.star-btn');
         const ratingInput = document.getElementById('rating-input');
         
         starBtns.forEach(btn => {
-            // Efek Hover yang mulus (Premium UX)
             btn.addEventListener('mouseenter', function() {
                 const hoverValue = parseInt(this.getAttribute('data-value'));
                 const currentValue = parseInt(ratingInput.value) || 0;
@@ -945,7 +930,6 @@
                 });
             });
 
-            // Logika Klik
             btn.addEventListener('click', function() {
                 const value = parseInt(this.getAttribute('data-value'));
                 ratingInput.value = value;
@@ -996,7 +980,6 @@
                         showToast("Terima kasih! Ulasan Anda telah berhasil disimpan.", "success");
                         this.reset();
                         
-                        // Kembalikan bintang ke keadaan semula
                         starBtns.forEach(b => {
                             const icon = b.querySelector('.star-icon');
                             icon.classList.remove('text-luxury-gold', 'fill-current');
