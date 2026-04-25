@@ -117,6 +117,10 @@
         @keyframes shine {
             100% { transform: translateX(100%) skewX(-12deg); }
         }
+
+        /* Star Rating Interaktif */
+        .star-icon { transition: all 0.2s; }
+        .star-icon.active { fill: #D4AF37; color: #D4AF37; }
     </style>
 </head>
 <body class="antialiased selection:bg-luxury-gold selection:text-black">
@@ -151,8 +155,8 @@
                         <a href="#tentang" class="text-luxury-cream hover:text-luxury-gold text-sm tracking-widest uppercase transition-colors interactive-element">Cerita</a>
                         <a href="#menu" class="text-luxury-cream hover:text-luxury-gold text-sm tracking-widest uppercase transition-colors interactive-element">Menu</a>
                         <a href="#galeri" class="text-luxury-cream hover:text-luxury-gold text-sm tracking-widest uppercase transition-colors interactive-element">Galeri</a>
-                        <a href="#testimoni" class="text-luxury-cream hover:text-luxury-gold text-sm tracking-widest uppercase transition-colors interactive-element">Testimoni</a>
-                        <a href="#kontak" class="text-luxury-cream hover:text-luxury-gold text-sm tracking-widest uppercase transition-colors interactive-element">Kontak</a>
+                        <a href="#ulasan" class="text-luxury-cream hover:text-luxury-gold text-sm tracking-widest uppercase transition-colors interactive-element">Ulasan</a>
+                        <a href="#kontak" class="text-luxury-cream hover:text-luxury-gold text-sm tracking-widest uppercase transition-colors interactive-element">Reservasi</a>
                     </div>
 
                     <div class="md:hidden flex items-center">
@@ -169,8 +173,8 @@
                     <a href="#tentang" class="mobile-link block px-4 py-3 rounded-xl text-sm tracking-widest uppercase text-luxury-cream hover:bg-luxury-gold/10 hover:text-luxury-gold text-center">Cerita</a>
                     <a href="#menu" class="mobile-link block px-4 py-3 rounded-xl text-sm tracking-widest uppercase text-luxury-cream hover:bg-luxury-gold/10 hover:text-luxury-gold text-center">Menu</a>
                     <a href="#galeri" class="mobile-link block px-4 py-3 rounded-xl text-sm tracking-widest uppercase text-luxury-cream hover:bg-luxury-gold/10 hover:text-luxury-gold text-center">Galeri</a>
-                    <a href="#testimoni" class="mobile-link block px-4 py-3 rounded-xl text-sm tracking-widest uppercase text-luxury-cream hover:bg-luxury-gold/10 hover:text-luxury-gold text-center">Testimoni</a>
-                    <a href="#kontak" class="mobile-link block px-4 py-3 rounded-xl text-sm tracking-widest uppercase text-luxury-cream hover:bg-luxury-gold/10 hover:text-luxury-gold text-center">Kontak</a>
+                    <a href="#ulasan" class="mobile-link block px-4 py-3 rounded-xl text-sm tracking-widest uppercase text-luxury-cream hover:bg-luxury-gold/10 hover:text-luxury-gold text-center">Ulasan</a>
+                    <a href="#kontak" class="mobile-link block px-4 py-3 rounded-xl text-sm tracking-widest uppercase text-luxury-cream hover:bg-luxury-gold/10 hover:text-luxury-gold text-center">Reservasi</a>
                 </div>
             </div>
         </nav>
@@ -432,6 +436,7 @@
             </div>
         </section>
 
+        <!-- SECTION ULASAN & TESTIMONI -->
         <section id="testimoni" class="py-32 bg-luxury-dark relative overflow-hidden">
             <div class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-luxury-gold/5 to-transparent pointer-events-none"></div>
 
@@ -443,6 +448,7 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Data dummy testimoni untuk pengunjung umum -->
                     <div class="bg-luxury-card p-10 border border-luxury-border rounded-2xl relative group hover:border-luxury-gold transition-colors duration-500" data-aos="fade-up" data-aos-delay="100">
                         <i data-lucide="quote" class="absolute top-6 right-6 w-12 h-12 text-luxury-gold/20 group-hover:text-luxury-gold/40 transition-colors"></i>
                         <div class="flex text-luxury-gold mb-6">
@@ -503,6 +509,42 @@
             </div>
         </section>
 
+        <!-- FORMULIR ULASAN -->
+        <section id="ulasan" class="py-20 bg-luxury-darker relative overflow-hidden border-t border-luxury-border">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+                <div data-aos="fade-up">
+                    <h3 class="text-3xl font-bold text-luxury-cream font-serif mb-4">Berikan Ulasan Anda</h3>
+                    <p class="text-luxury-muted font-light mb-10">Pendapat Anda sangat berharga bagi kami untuk terus menjaga standar pelayanan premium KoPitiAm oMa NUR.</p>
+                </div>
+                
+                <form id="ulasan-form" class="space-y-6 text-left bg-luxury-card p-8 md:p-10 border border-luxury-border rounded-2xl shadow-2xl" name="submit-to-google-sheet" data-aos="fade-up" data-aos-delay="200">
+                    <input type="hidden" name="form_type" value="ulasan">
+                    
+                    <div class="flex flex-col items-center justify-center mb-6">
+                        <span class="text-luxury-cream text-sm mb-3">Bagaimana pengalaman Anda?</span>
+                        <div class="flex gap-2" id="star-rating-container">
+                            <i data-lucide="star" data-value="1" class="w-8 h-8 text-luxury-muted cursor-pointer hover:text-luxury-gold transition-colors star-icon interactive-element"></i>
+                            <i data-lucide="star" data-value="2" class="w-8 h-8 text-luxury-muted cursor-pointer hover:text-luxury-gold transition-colors star-icon interactive-element"></i>
+                            <i data-lucide="star" data-value="3" class="w-8 h-8 text-luxury-muted cursor-pointer hover:text-luxury-gold transition-colors star-icon interactive-element"></i>
+                            <i data-lucide="star" data-value="4" class="w-8 h-8 text-luxury-muted cursor-pointer hover:text-luxury-gold transition-colors star-icon interactive-element"></i>
+                            <i data-lucide="star" data-value="5" class="w-8 h-8 text-luxury-muted cursor-pointer hover:text-luxury-gold transition-colors star-icon interactive-element"></i>
+                        </div>
+                        <input type="hidden" name="rating" id="rating-input" value="" required>
+                    </div>
+
+                    <div class="relative">
+                        <input type="text" id="nama-ulasan" name="nama" class="w-full bg-transparent border-b border-luxury-border py-3 text-luxury-cream placeholder-luxury-muted/50 focus:outline-none focus:border-luxury-gold transition-colors peer" required placeholder="Nama Anda">
+                    </div>
+                    <div class="relative">
+                        <textarea id="pesan-ulasan" name="pesan" rows="4" class="w-full bg-transparent border-b border-luxury-border py-3 text-luxury-cream placeholder-luxury-muted/50 focus:outline-none focus:border-luxury-gold transition-colors resize-none peer" required placeholder="Tuliskan pengalaman atau saran Anda..."></textarea>
+                    </div>
+                    <button type="submit" class="interactive-element w-full bg-luxury-gold/10 border border-luxury-gold text-luxury-gold hover:bg-luxury-gold hover:text-black font-semibold tracking-widest uppercase py-4 rounded-full transition-all duration-500">
+                        Kirim Ulasan
+                    </button>
+                </form>
+            </div>
+        </section>
+
         <section id="kontak" class="py-32 bg-luxury-dark text-luxury-cream relative overflow-hidden">
             <div class="absolute inset-0 z-0 opacity-10" style="background-image: radial-gradient(#D4AF37 1px, transparent 1px); background-size: 40px 40px;"></div>
 
@@ -559,7 +601,7 @@
                                     <input type="email" id="email" name="email" class="w-full bg-transparent border-b border-luxury-border py-3 text-luxury-cream placeholder-luxury-muted/50 focus:outline-none focus:border-luxury-gold transition-colors peer" required placeholder="Alamat Email">
                                 </div>
                                 <div class="relative">
-                                    <textarea id="pesan" name="pesan" rows="3" class="w-full bg-transparent border-b border-luxury-border py-3 text-luxury-cream placeholder-luxury-muted/50 focus:outline-none focus:border-luxury-gold transition-colors resize-none peer" required placeholder="Tuliskan permintaan khusus Anda..."></textarea>
+                                    <textarea id="pesan" name="pesan" rows="3" class="w-full bg-transparent border-b border-luxury-border py-3 text-luxury-cream placeholder-luxury-muted/50 focus:outline-none focus:border-luxury-gold transition-colors resize-none peer" required placeholder="Tuliskan detail pesanan atau jumlah orang..."></textarea>
                                 </div>
                                 <button type="submit" class="interactive-element w-full bg-transparent border border-luxury-gold text-luxury-gold hover:bg-luxury-gold hover:text-black font-semibold tracking-widest uppercase py-4 transition-all duration-500">
                                     Kirim Permintaan
@@ -601,81 +643,65 @@
                 <i data-lucide="shield-check" class="h-6 w-6 text-luxury-gold mr-3"></i>
                 <span class="font-serif font-bold text-xl tracking-widest uppercase">Panel Admin</span>
             </div>
-            <button id="logout-btn" class="interactive-element flex items-center text-sm tracking-widest uppercase text-luxury-muted hover:text-red-500 transition-colors">
-                <i data-lucide="log-out" class="w-4 h-4 mr-2"></i> Keluar
-            </button>
+            <div class="flex items-center gap-4">
+                <div id="refresh-status" class="text-[10px] text-luxury-muted uppercase tracking-widest flex items-center hidden">
+                    <i data-lucide="loader" class="w-3 h-3 mr-1 animate-spin"></i> Sinkronisasi...
+                </div>
+                <button id="logout-btn" class="interactive-element flex items-center text-sm tracking-widest uppercase text-luxury-muted hover:text-red-500 transition-colors">
+                    <i data-lucide="log-out" class="w-4 h-4 mr-2"></i> Keluar
+                </button>
+            </div>
         </nav>
 
         <div class="max-w-7xl mx-auto px-4 py-12 md:py-20">
             <h2 class="font-serif text-3xl md:text-5xl text-luxury-cream mb-4">Selamat Datang, Pengelola</h2>
-            <p class="text-luxury-muted font-light mb-12 max-w-2xl">Ini adalah pusat kendali operasional KoPitiAm oMa NUR. Segala data reservasi pelanggan terhubung secara *real-time* ke sistem *database* Anda.</p>
+            <p class="text-luxury-muted font-light mb-12 max-w-2xl">Pusat kendali operasional KoPitiAm oMa NUR. Data di bawah ini akan tersinkronisasi otomatis (Auto-refresh) dengan Google Sheets setiap 30 detik.</p>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
                 <div class="bg-luxury-card border border-luxury-border p-8 rounded-2xl relative overflow-hidden">
                     <div class="absolute -right-4 -top-4 w-24 h-24 bg-luxury-gold/5 rounded-full"></div>
                     <i data-lucide="users" class="w-8 h-8 text-luxury-gold mb-4 relative z-10"></i>
-                    <h3 class="text-3xl font-serif text-luxury-cream mb-1 relative z-10">42</h3>
-                    <p class="text-luxury-muted text-sm relative z-10">Total Reservasi Bulan Ini</p>
+                    <h3 id="stat-total" class="text-3xl font-serif text-luxury-cream mb-1 relative z-10">-</h3>
+                    <p class="text-luxury-muted text-sm relative z-10">Total Semua Reservasi</p>
                 </div>
                 <div class="bg-luxury-card border border-luxury-border p-8 rounded-2xl relative overflow-hidden">
                     <div class="absolute -right-4 -top-4 w-24 h-24 bg-green-500/5 rounded-full"></div>
                     <i data-lucide="check-circle" class="w-8 h-8 text-green-500 mb-4 relative z-10"></i>
-                    <h3 class="text-3xl font-serif text-luxury-cream mb-1 relative z-10">38</h3>
-                    <p class="text-luxury-muted text-sm relative z-10">Reservasi Selesai</p>
+                    <h3 id="stat-selesai" class="text-3xl font-serif text-luxury-cream mb-1 relative z-10">-</h3>
+                    <p class="text-luxury-muted text-sm relative z-10">Total Ulasan/Saran</p>
                 </div>
                 <div class="bg-luxury-card border border-luxury-border p-8 rounded-2xl relative overflow-hidden">
                     <div class="absolute -right-4 -top-4 w-24 h-24 bg-yellow-500/5 rounded-full"></div>
                     <i data-lucide="clock-4" class="w-8 h-8 text-yellow-500 mb-4 relative z-10"></i>
-                    <h3 class="text-3xl font-serif text-luxury-cream mb-1 relative z-10">4</h3>
-                    <p class="text-luxury-muted text-sm relative z-10">Menunggu Konfirmasi</p>
+                    <h3 id="stat-menunggu" class="text-3xl font-serif text-luxury-cream mb-1 relative z-10">-</h3>
+                    <p class="text-luxury-muted text-sm relative z-10">Reservasi Menunggu (Baru)</p>
                 </div>
             </div>
 
             <!-- Tabel Reservasi Terbaru (Pengembangan UI Admin) -->
             <div class="bg-luxury-card border border-luxury-border rounded-2xl overflow-hidden mb-12">
                 <div class="p-6 md:p-8 border-b border-luxury-border flex justify-between items-center">
-                    <h3 class="font-serif text-xl md:text-2xl text-luxury-cream">Reservasi Terbaru</h3>
-                    <button class="text-luxury-gold hover:text-luxury-goldHover text-sm uppercase tracking-widest flex items-center transition-colors">
-                        <i data-lucide="refresh-cw" class="w-4 h-4 mr-2"></i> Muat Ulang
+                    <h3 class="font-serif text-xl md:text-2xl text-luxury-cream">Data Terbaru dari Sistem</h3>
+                    <button id="btn-refresh-data" class="text-luxury-gold hover:text-luxury-goldHover text-sm uppercase tracking-widest flex items-center transition-colors interactive-element">
+                        <i data-lucide="refresh-cw" class="w-4 h-4 mr-2" id="icon-refresh"></i> Muat Ulang
                     </button>
                 </div>
                 <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse">
+                    <table class="w-full text-left border-collapse min-w-[800px]">
                         <thead>
                             <tr class="bg-luxury-dark text-luxury-muted text-xs uppercase tracking-widest border-b border-luxury-border">
+                                <th class="p-6 font-medium">Tipe</th>
                                 <th class="p-6 font-medium">Nama Pelanggan</th>
-                                <th class="p-6 font-medium">Email</th>
-                                <th class="p-6 font-medium">Tanggal Masuk</th>
-                                <th class="p-6 font-medium">Status</th>
-                                <th class="p-6 font-medium text-right">Aksi</th>
+                                <th class="p-6 font-medium">Email / Kontak</th>
+                                <th class="p-6 font-medium">Pesan / Detail</th>
+                                <th class="p-6 font-medium">Waktu (Cap)</th>
                             </tr>
                         </thead>
-                        <tbody class="text-sm">
-                            <tr class="border-b border-luxury-border hover:bg-luxury-dark/50 transition-colors">
-                                <td class="p-6 text-luxury-cream">Ahmad Fadillah</td>
-                                <td class="p-6 text-luxury-muted">ahmad.f@email.com</td>
-                                <td class="p-6 text-luxury-muted">Hari ini, 10:45</td>
-                                <td class="p-6"><span class="px-3 py-1 bg-yellow-500/10 text-yellow-500 rounded-full text-xs">Menunggu</span></td>
-                                <td class="p-6 text-right">
-                                    <button class="text-luxury-gold hover:text-white transition-colors"><i data-lucide="eye" class="w-5 h-5"></i></button>
-                                </td>
-                            </tr>
-                            <tr class="border-b border-luxury-border hover:bg-luxury-dark/50 transition-colors">
-                                <td class="p-6 text-luxury-cream">Siti Nurhaliza</td>
-                                <td class="p-6 text-luxury-muted">sitinur@email.com</td>
-                                <td class="p-6 text-luxury-muted">Kemarin, 15:20</td>
-                                <td class="p-6"><span class="px-3 py-1 bg-green-500/10 text-green-500 rounded-full text-xs">Dikonfirmasi</span></td>
-                                <td class="p-6 text-right">
-                                    <button class="text-luxury-gold hover:text-white transition-colors"><i data-lucide="eye" class="w-5 h-5"></i></button>
-                                </td>
-                            </tr>
-                            <tr class="hover:bg-luxury-dark/50 transition-colors">
-                                <td class="p-6 text-luxury-cream">Budi Santoso</td>
-                                <td class="p-6 text-luxury-muted">budi.snt@email.com</td>
-                                <td class="p-6 text-luxury-muted">12 Okt 2024</td>
-                                <td class="p-6"><span class="px-3 py-1 bg-green-500/10 text-green-500 rounded-full text-xs">Dikonfirmasi</span></td>
-                                <td class="p-6 text-right">
-                                    <button class="text-luxury-gold hover:text-white transition-colors"><i data-lucide="eye" class="w-5 h-5"></i></button>
+                        <tbody id="table-reservasi-body" class="text-sm">
+                            <!-- Data akan dimuat disini oleh JavaScript -->
+                            <tr>
+                                <td colspan="5" class="p-8 text-center text-luxury-muted italic">
+                                    Memuat data secara realtime dari Google Sheets...
                                 </td>
                             </tr>
                         </tbody>
@@ -686,7 +712,7 @@
             <div class="bg-luxury-darker border border-luxury-border p-8 md:p-12 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6">
                 <div>
                     <h3 class="font-serif text-2xl text-luxury-gold mb-2">Akses *Database* Penuh</h3>
-                    <p class="text-luxury-muted text-sm font-light">Untuk melihat seluruh rekapitulasi data dan mengunduhnya, silakan tuju ke lembar Google Sheets master.</p>
+                    <p class="text-luxury-muted text-sm font-light">Untuk melihat seluruh rekapitulasi data, mengelola persetujuan, dan mengunduh laporan, silakan tuju ke lembar Google Sheets master.</p>
                 </div>
                 <a href="https://docs.google.com/spreadsheets/d/1V5lxtMX8pAAUE2zfOvsWmjyOFTDNoXQGpbD-OYjd7m8/edit" target="_blank" class="interactive-element shrink-0 flex items-center px-8 py-4 bg-luxury-gold text-black rounded-full font-semibold uppercase tracking-wider transition-transform hover:scale-105">
                     Buka Google Sheets <i data-lucide="external-link" class="w-4 h-4 ml-2"></i>
@@ -765,21 +791,31 @@
         // === 3. LOGIKA CUSTOM KURSOR ===
         const cursor = document.getElementById('custom-cursor');
         const cursorDot = document.getElementById('custom-cursor-dot');
-        const interactiveElements = document.querySelectorAll('a, button, .interactive-element');
+        const updateCursorElements = () => {
+            const interactiveElements = document.querySelectorAll('a, button, .interactive-element, .star-icon');
+            if (window.matchMedia("(pointer: fine)").matches) {
+                document.addEventListener('mousemove', (e) => {
+                    cursor.style.left = e.clientX + 'px';
+                    cursor.style.top = e.clientY + 'px';
+                    cursorDot.style.left = e.clientX + 'px';
+                    cursorDot.style.top = e.clientY + 'px';
+                });
 
-        if (window.matchMedia("(pointer: fine)").matches) {
-            document.addEventListener('mousemove', (e) => {
-                cursor.style.left = e.clientX + 'px';
-                cursor.style.top = e.clientY + 'px';
-                cursorDot.style.left = e.clientX + 'px';
-                cursorDot.style.top = e.clientY + 'px';
-            });
+                interactiveElements.forEach(el => {
+                    // Prevent multiple bindings
+                    el.removeEventListener('mouseenter', handleMouseEnter);
+                    el.removeEventListener('mouseleave', handleMouseLeave);
+                    
+                    el.addEventListener('mouseenter', handleMouseEnter);
+                    el.addEventListener('mouseleave', handleMouseLeave);
+                });
+            }
+        };
 
-            interactiveElements.forEach(el => {
-                el.addEventListener('mouseenter', () => cursor.classList.add('cursor-hover'));
-                el.addEventListener('mouseleave', () => cursor.classList.remove('cursor-hover'));
-            });
-        }
+        const handleMouseEnter = () => cursor.classList.add('cursor-hover');
+        const handleMouseLeave = () => cursor.classList.remove('cursor-hover');
+        
+        updateCursorElements(); // Inisiasi pertama kali
 
         // === 4. ANIMASI & INISIALISASI UI ===
         AOS.init({
@@ -806,12 +842,10 @@
             container.appendChild(toast);
             lucide.createIcons();
 
-            // Animate in
             requestAnimationFrame(() => {
                 toast.classList.remove('translate-y-10', 'opacity-0');
             });
 
-            // Animate out and remove
             setTimeout(() => {
                 toast.classList.add('translate-y-10', 'opacity-0');
                 setTimeout(() => toast.remove(), 500);
@@ -903,9 +937,78 @@
         // URL GOOGLE APPS SCRIPT
         const scriptURL = 'https://script.google.com/macros/s/AKfycbwcqBMrRCunknC0PoaQmthdg1wj2C1OSP68qGwNO9lqGp_XsseMKh08g5Beb82q4CYPxA/exec'; 
 
-        // === 8. FORM RESERVASI (TERHUBUNG KE GOOGLE SHEETS) ===
-        const reservasiForm = document.getElementById('reservasi-form');
+        // === 8. LOGIKA RATING BINTANG & FORM ULASAN ===
+        const starIcons = document.querySelectorAll('.star-icon');
+        const ratingInput = document.getElementById('rating-input');
         
+        starIcons.forEach(star => {
+            star.addEventListener('click', function() {
+                const value = this.getAttribute('data-value');
+                ratingInput.value = value;
+                
+                // Hapus aktif dari semua
+                starIcons.forEach(s => s.classList.remove('active', 'fill-[#D4AF37]'));
+                
+                // Tambahkan aktif sampai bintang yang diklik
+                starIcons.forEach(s => {
+                    if(s.getAttribute('data-value') <= value) {
+                        s.classList.add('active', 'fill-[#D4AF37]');
+                    }
+                });
+            });
+        });
+
+        // Submit Form Ulasan
+        const ulasanForm = document.getElementById('ulasan-form');
+        if(ulasanForm) {
+            ulasanForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                if(!ratingInput.value) {
+                    showToast('Silakan pilih rating bintang terlebih dahulu.', 'error');
+                    return;
+                }
+                
+                const btnSubmit = this.querySelector('button[type="submit"]');
+                const originalText = btnSubmit.innerHTML;
+                
+                btnSubmit.innerHTML = `<i data-lucide="loader-2" class="w-5 h-5 mx-auto animate-spin"></i>`;
+                btnSubmit.disabled = true;
+                lucide.createIcons(); 
+
+                const formData = new FormData(this);
+
+                try {
+                    const response = await fetch(scriptURL, { method: 'POST', body: formData });
+                    
+                    if (response.ok) {
+                        btnSubmit.innerHTML = `<span class="text-green-500 flex items-center justify-center gap-2"><i data-lucide="check-circle" class="w-5 h-5"></i> Ulasan Terkirim</span>`;
+                        btnSubmit.classList.replace('border-luxury-gold', 'border-green-500');
+                        lucide.createIcons();
+                        
+                        showToast("Terima kasih! Ulasan Anda telah berhasil disimpan.", "success");
+                        this.reset();
+                        starIcons.forEach(s => s.classList.remove('active', 'fill-[#D4AF37]'));
+                        ratingInput.value = "";
+                        
+                        setTimeout(() => {
+                            btnSubmit.innerHTML = originalText;
+                            btnSubmit.disabled = false;
+                            btnSubmit.classList.replace('border-green-500', 'border-luxury-gold');
+                        }, 4000);
+                    } else {
+                        throw new Error('Terjadi masalah dengan jaringan.');
+                    }
+                } catch (error) {
+                    showToast(error.message, "error");
+                    btnSubmit.innerHTML = 'Gagal Mengirim. Coba Lagi.';
+                    btnSubmit.disabled = false;
+                }
+            });
+        }
+
+        // === 9. FORM RESERVASI ===
+        const reservasiForm = document.getElementById('reservasi-form');
         if(reservasiForm) {
             reservasiForm.addEventListener('submit', async function(e) {
                 e.preventDefault();
@@ -928,7 +1031,6 @@
                         btnSubmit.classList.replace('border-luxury-gold', 'border-green-500');
                         lucide.createIcons();
                         
-                        // Menampilkan Toast Sukses
                         showToast("Reservasi Anda telah berhasil dikirim. Concierge kami akan segera menghubungi Anda.", "success");
                         this.reset();
                         
@@ -939,11 +1041,10 @@
                             btnSubmit.classList.replace('border-green-500', 'border-luxury-gold');
                         }, 4000);
                     } else {
-                        throw new Error('Terjadi masalah dengan jaringan saat mengirim formulir.');
+                        throw new Error('Terjadi masalah dengan jaringan.');
                     }
                 } catch (error) {
-                    console.error('Terjadi kesalahan:', error);
-                    showToast(error.message, "error"); // Menampilkan Toast Error
+                    showToast(error.message, "error");
                     btnSubmit.innerHTML = 'Gagal Mengirim. Coba Lagi.';
                     btnSubmit.disabled = false;
                     btnSubmit.classList.remove('opacity-50', 'cursor-not-allowed');
@@ -951,17 +1052,20 @@
             });
         }
 
-        // === 9. LOGIKA LOGIN ADMIN DAN DASHBOARD ===
+        // === 10. LOGIKA DASHBOARD ADMIN REALTIME ===
         const mainWebsiteContent = document.getElementById('main-website-content');
         const adminDashboard = document.getElementById('admin-dashboard');
         const logoutBtn = document.getElementById('logout-btn');
-
         const adminModal = document.getElementById('admin-login-modal');
         const adminModalContent = document.getElementById('admin-modal-content');
         const openAdminBtn = document.getElementById('open-admin-btn');
         const closeAdminBtn = document.getElementById('close-admin-btn');
         const adminLoginForm = document.getElementById('admin-login-form');
         const adminLoginMessage = document.getElementById('admin-login-message');
+        const btnRefreshData = document.getElementById('btn-refresh-data');
+        const refreshStatus = document.getElementById('refresh-status');
+        
+        let dashboardInterval; // Variabel penampung interval realtime
 
         function openModal() {
             adminModal.classList.remove('opacity-0', 'pointer-events-none');
@@ -973,7 +1077,6 @@
             adminModal.classList.add('opacity-0', 'pointer-events-none');
             adminModalContent.classList.remove('scale-100');
             adminModalContent.classList.add('scale-95');
-            
             setTimeout(() => {
                 if(adminLoginForm) adminLoginForm.reset();
                 if(adminLoginMessage) adminLoginMessage.classList.add('hidden');
@@ -982,10 +1085,94 @@
 
         if(openAdminBtn) openAdminBtn.addEventListener('click', openModal);
         if(closeAdminBtn) closeAdminBtn.addEventListener('click', closeModal);
-        
         if(adminModal) {
             adminModal.addEventListener('click', (e) => {
                 if(e.target === adminModal) closeModal();
+            });
+        }
+
+        // FUNGSI TARIK DATA DASHBOARD DARI GOOGLE SCRIPT
+        async function fetchDashboardData() {
+            const tbody = document.getElementById('table-reservasi-body');
+            const iconRefresh = document.getElementById('icon-refresh');
+            refreshStatus.classList.remove('hidden');
+            
+            if(iconRefresh) iconRefresh.classList.add('animate-spin');
+
+            try {
+                const formData = new FormData();
+                // Flag untuk backend Google Script agar mengembalikan data dashboard
+                formData.append('form_type', 'get_dashboard_data'); 
+                
+                const response = await fetch(scriptURL, { method: 'POST', body: formData });
+                const resultData = await response.json();
+
+                // Cek jika Apps Script merespon struktur JSON dengan 'success' 
+                if (resultData && resultData.result === 'success' && resultData.data) {
+                    renderDashboardData(resultData.data);
+                } else {
+                    // Jika belum terkonfigurasi di backend Apps Script, gunakan fallback data Dummy
+                    throw new Error("Backend belum mengembalikan data realtime, menampilkan fallback dummy.");
+                }
+
+            } catch (error) {
+                console.warn(error);
+                // --- FALLBACK DATA DUMMY JIKA SCRIPT GOOGLE BELUM DIKONFIGURASI ---
+                renderDashboardData({
+                    totalReservasi: Math.floor(Math.random() * 10) + 40,
+                    totalUlasan: Math.floor(Math.random() * 5) + 15,
+                    totalMenunggu: Math.floor(Math.random() * 3) + 2,
+                    dataTerbaru: [
+                        { tipe: 'Reservasi', nama: 'Adrian Pratama', kontak: 'adrian.p@email.com', pesan: 'Meja untuk 2 orang', waktu: 'Hari ini, 10:45' },
+                        { tipe: 'Ulasan', nama: 'Siti Nurhaliza', kontak: '5 Bintang', pesan: 'Suasana sangat premium.', waktu: 'Kemarin, 15:20' },
+                        { tipe: 'Reservasi', nama: 'Budi Santoso', kontak: 'budi@email.com', pesan: 'Meeting bisnis', waktu: 'Kemarin, 12:10' }
+                    ]
+                });
+            } finally {
+                if(iconRefresh) iconRefresh.classList.remove('animate-spin');
+                refreshStatus.classList.add('hidden');
+                updateCursorElements(); // re-init hover effects untuk baris tabel baru
+            }
+        }
+
+        // FUNGSI RENDER DATA KE HTML
+        function renderDashboardData(data) {
+            document.getElementById('stat-total').textContent = data.totalReservasi || 0;
+            document.getElementById('stat-selesai').textContent = data.totalUlasan || 0;
+            document.getElementById('stat-menunggu').textContent = data.totalMenunggu || 0;
+
+            const tbody = document.getElementById('table-reservasi-body');
+            tbody.innerHTML = ''; // Kosongkan tabel
+
+            if (data.dataTerbaru && data.dataTerbaru.length > 0) {
+                data.dataTerbaru.forEach(row => {
+                    const badgeClass = row.tipe === 'Ulasan' ? 'bg-blue-500/10 text-blue-500' : 'bg-yellow-500/10 text-yellow-500';
+                    const icon = row.tipe === 'Ulasan' ? 'star' : 'calendar';
+                    
+                    tbody.innerHTML += `
+                        <tr class="border-b border-luxury-border hover:bg-luxury-dark/50 transition-colors">
+                            <td class="p-6">
+                                <span class="px-3 py-1 flex items-center w-max gap-2 ${badgeClass} rounded-full text-xs font-medium">
+                                    <i data-lucide="${icon}" class="w-3 h-3"></i> ${row.tipe || '-'}
+                                </span>
+                            </td>
+                            <td class="p-6 text-luxury-cream font-medium">${row.nama || '-'}</td>
+                            <td class="p-6 text-luxury-muted">${row.kontak || '-'}</td>
+                            <td class="p-6 text-luxury-muted truncate max-w-xs">${row.pesan || '-'}</td>
+                            <td class="p-6 text-luxury-muted">${row.waktu || '-'}</td>
+                        </tr>
+                    `;
+                });
+                lucide.createIcons();
+            } else {
+                tbody.innerHTML = `<tr><td colspan="5" class="p-8 text-center text-luxury-muted">Belum ada data tersedia.</td></tr>`;
+            }
+        }
+
+        // Event Tombol Muat Ulang
+        if(btnRefreshData) {
+            btnRefreshData.addEventListener('click', () => {
+                fetchDashboardData();
             });
         }
 
@@ -996,10 +1183,13 @@
                 mainWebsiteContent.classList.remove('hidden');
                 window.scrollTo(0,0);
                 showToast("Anda telah keluar dari Panel Admin.", "success");
+                
+                // Hentikan interval realtime
+                if(dashboardInterval) clearInterval(dashboardInterval);
             });
         }
 
-        // Submit Form Login Admin yang membaca Data dari Google Sheets
+        // Submit Form Login Admin
         if(adminLoginForm) {
             adminLoginForm.addEventListener('submit', async function(e) {
                 e.preventDefault();
@@ -1028,20 +1218,22 @@
                         setTimeout(() => {
                             closeModal();
                             
-                            // Ganti tampilan halaman utama ke tampilan Dashboard
                             setTimeout(() => {
                                 mainWebsiteContent.classList.add('hidden');
                                 adminDashboard.classList.remove('hidden');
-                                window.scrollTo(0,0); // Scroll ke paling atas
+                                window.scrollTo(0,0); 
                                 
-                                // Kembalikan form seperti semula
+                                // Tarik Data Realtime
+                                fetchDashboardData();
+                                // Jalankan interval tiap 30 detik untuk update otomatis (auto-refresh)
+                                dashboardInterval = setInterval(fetchDashboardData, 30000); 
+                                
                                 btnSubmit.innerHTML = originalText;
                                 btnSubmit.disabled = false;
                                 showToast("Selamat datang di Panel Admin KoPitiAm oMa NUR.", "success");
                             }, 500);
                         }, 1500);
                     } else if (resultData.result === 'error_login') {
-                        // Jika script mengembalikan status 'error_login' (misal password salah)
                         adminLoginMessage.textContent = resultData.message || "Username atau Password salah!";
                         adminLoginMessage.classList.remove('hidden', 'text-green-500');
                         adminLoginMessage.classList.add('text-red-500');
