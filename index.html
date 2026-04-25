@@ -181,7 +181,7 @@
 
         <section id="beranda" class="relative h-screen flex items-center justify-center overflow-hidden">
             <div class="absolute inset-0 z-0">
-                <img src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&q=80" alt="Suasana Kedai Kopi" class="w-full h-full object-cover scale-105" id="hero-img" />
+                <img src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&q=80" alt="Suasana Kedai Kopi" class="w-full h-full object-cover scale-105 transition-all duration-1000" id="hero-img" />
                 <div class="absolute inset-0 bg-gradient-to-b from-luxury-dark/90 via-luxury-dark/70 to-luxury-dark"></div>
             </div>
             
@@ -680,6 +680,22 @@
                     </table>
                 </div>
             </div>
+
+            <!-- FITUR BARU: PENGATURAN VISUAL / GAMBAR -->
+            <div class="bg-luxury-card border border-luxury-border rounded-2xl overflow-hidden mb-12 p-6 md:p-8">
+                <h3 class="font-serif text-xl md:text-2xl text-luxury-cream mb-6">Pengaturan Tampilan (Visual)</h3>
+                <div class="space-y-4 max-w-2xl">
+                    <div>
+                        <label class="text-luxury-muted text-xs uppercase tracking-widest mb-2 block">Tautan (URL) Gambar Latar Utama / Hero</label>
+                        <input type="text" id="input-hero-image" class="w-full bg-transparent border-b border-luxury-border py-3 text-luxury-cream focus:border-luxury-gold transition-colors outline-none" placeholder="Masukkan link gambar (https://...)">
+                        <p class="text-[10px] text-luxury-muted mt-2">Gambar ini akan langsung mengubah latar belakang halaman awal website.</p>
+                    </div>
+                    <button id="btn-save-visuals" class="interactive-element px-8 py-3 bg-luxury-gold text-black rounded-full font-semibold uppercase tracking-widest text-xs transition-transform hover:scale-105 mt-4 flex items-center justify-center">
+                        Simpan Visual
+                    </button>
+                </div>
+            </div>
+            
         </div>
     </div>
 
@@ -904,6 +920,62 @@
         const scriptURL = 'https://script.google.com/macros/s/AKfycbwcqBMrRCunknC0PoaQmthdg1wj2C1OSP68qGwNO9lqGp_XsseMKh08g5Beb82q4CYPxA/exec'; 
 
         // ==========================================
+        // === PENGATURAN TAMPILAN DINAMIS (VISUAL) ===
+        // ==========================================
+        async function loadVisualSettings() {
+            try {
+                const formData = new FormData();
+                formData.append('form_type', 'get_visuals');
+                const response = await fetch(scriptURL, { method: 'POST', body: formData });
+                const result = await response.json();
+                
+                if (result.result === 'success' && result.hero_image) {
+                    // Update gambar latar jika ada datanya di backend
+                    document.getElementById('hero-img').src = result.hero_image;
+                    const inputAdmin = document.getElementById('input-hero-image');
+                    if(inputAdmin) inputAdmin.value = result.hero_image;
+                }
+            } catch(e) {
+                console.log("Gagal memuat pengaturan visual. Menggunakan gambar bawaan.");
+            }
+        }
+
+        const btnSaveVisuals = document.getElementById('btn-save-visuals');
+        if(btnSaveVisuals) {
+            btnSaveVisuals.addEventListener('click', async () => {
+                const heroUrl = document.getElementById('input-hero-image').value;
+                const originalText = btnSaveVisuals.innerHTML;
+                
+                btnSaveVisuals.innerHTML = `<i data-lucide="loader" class="w-4 h-4 animate-spin inline mr-2"></i> Menyimpan...`;
+                btnSaveVisuals.disabled = true;
+                lucide.createIcons();
+
+                const formData = new FormData();
+                formData.append('form_type', 'update_visuals');
+                formData.append('hero_image', heroUrl);
+
+                try {
+                    const response = await fetch(scriptURL, { method: 'POST', body: formData });
+                    const result = await response.json();
+                    
+                    if(result.result === 'success') {
+                        showToast("Visual berhasil diperbarui. Halaman akan menggunakan gambar baru.", "success");
+                        // Ganti gambar langsung tanpa reload
+                        if(heroUrl) document.getElementById('hero-img').src = heroUrl;
+                    } else {
+                        showToast("Gagal menyimpan visual", "error");
+                    }
+                } catch(e) {
+                    showToast("Terjadi kesalahan jaringan", "error");
+                }
+                
+                btnSaveVisuals.innerHTML = originalText;
+                btnSaveVisuals.disabled = false;
+            });
+        }
+
+
+        // ==========================================
         // === FITUR MOTIVASI HARIAN & VISITOR ===
         // ==========================================
         function showMotivation() {
@@ -952,6 +1024,7 @@
         
         // Panggil fungsi ketika halaman sudah siap (delay 2 detik menghindari crash dgn preloader)
         window.addEventListener('DOMContentLoaded', () => {
+            loadVisualSettings();
             setTimeout(recordVisitor, 2000);
         });
         // ==========================================
@@ -1158,9 +1231,8 @@
         const btnToggleMotivation = document.getElementById('btn-toggle-motivation');
         if (btnToggleMotivation) {
             btnToggleMotivation.addEventListener('click', async () => {
-                const newState = currentMotivationStatus ? "Nonaktif" : "Aktif"; // Balikkan keadaanya
+                const newState = currentMotivationStatus ? "Nonaktif" : "Aktif"; 
                 
-                // Ubah state visual menjadi loading
                 btnToggleMotivation.innerHTML = `<i data-lucide="loader" class="w-4 h-4 animate-spin"></i> Mengubah...`;
                 btnToggleMotivation.disabled = true;
                 lucide.createIcons();
@@ -1175,14 +1247,12 @@
 
                     if (result.result === 'success') {
                         showToast(result.message, "success");
-                        // Refresh data dashboard agar UI ikut ter-update
                         fetchDashboardData(); 
                     } else {
                         throw new Error("Gagal mengubah status motivasi");
                     }
                 } catch (error) {
                     showToast(error.message, "error");
-                    // Refresh jika gagal
                     fetchDashboardData();
                 }
             });
@@ -1287,8 +1357,6 @@
                 mainWebsiteContent.classList.remove('hidden');
                 window.scrollTo(0,0);
                 showToast("Anda telah keluar dari Panel Admin.", "success");
-                
-                if(dashboardInterval) clearInterval(dashboardInterval);
             });
         }
 
@@ -1326,8 +1394,6 @@
                                 window.scrollTo(0,0); 
                                 
                                 fetchDashboardData();
-                                // Interval auto-refresh dihapus sesuai permintaan agar tidak refresh otomatis
-                                // dashboardInterval = setInterval(fetchDashboardData, 30000); 
                                 
                                 btnSubmit.innerHTML = originalText;
                                 btnSubmit.disabled = false;
