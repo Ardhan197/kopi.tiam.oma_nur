@@ -129,7 +129,8 @@
             <div class="absolute inset-0 border-t-2 border-luxury-gold rounded-full animate-spin"></div>
             <i data-lucide="coffee" class="absolute inset-0 m-auto w-8 h-8 text-luxury-gold animate-pulse"></i>
         </div>
-        <h1 class="font-serif text-2xl md:text-4xl text-luxury-cream tracking-[0.2em] uppercase mb-4 text-center px-4">KoPi tiAm oMa NUR</h1>
+        <!-- Dihapus class uppercase agar besar kecilnya sesuai teks -->
+        <h1 class="font-serif text-2xl md:text-4xl text-luxury-cream tracking-[0.2em] mb-4 text-center px-4">KoPi tiAm oMa NUR</h1>
         <p class="text-luxury-gold text-xs md:text-sm tracking-[0.5em] uppercase opacity-70">Menyeduh Kesempurnaan</p>
     </div>
 
@@ -146,7 +147,8 @@
                 <div class="flex justify-between items-center h-16 bg-black/40 backdrop-blur-md border border-luxury-border rounded-full px-6 md:px-10 shadow-[0_0_30px_rgba(0,0,0,0.5)]">
                     <div class="flex-shrink-0 flex items-center cursor-pointer interactive-element" onclick="window.scrollTo(0,0)">
                         <i data-lucide="coffee" class="h-6 w-6 text-luxury-gold mr-3"></i>
-                        <span class="font-serif font-bold text-lg md:text-xl text-luxury-cream tracking-widest uppercase">KoPi tiAm oMa NUR</span>
+                        <!-- Dihapus class uppercase agar besar kecilnya sesuai teks -->
+                        <span class="font-serif font-bold text-lg md:text-xl text-luxury-cream tracking-widest">KoPi tiAm oMa NUR</span>
                     </div>
                     
                     <div class="hidden md:flex space-x-8">
@@ -573,7 +575,8 @@
         <footer class="bg-[#030202] text-luxury-muted py-12 border-t border-[#1a1514]">
             <div class="max-w-7xl mx-auto px-4 flex flex-col items-center">
                 <i data-lucide="coffee" class="h-8 w-8 text-luxury-gold mb-6"></i>
-                <span class="font-serif text-xl md:text-2xl text-luxury-cream tracking-[0.2em] uppercase mb-8 text-center">KoPi tiAm oMa NUR</span>
+                <!-- Dihapus class uppercase agar besar kecilnya sesuai teks -->
+                <span class="font-serif text-xl md:text-2xl text-luxury-cream tracking-[0.2em] mb-8 text-center">KoPi tiAm oMa NUR</span>
                 
                 <div class="flex space-x-8 mb-10">
                     <a href="#" class="text-luxury-muted hover:text-luxury-gold transition-colors interactive-element"><i data-lucide="instagram" class="w-5 h-5"></i></a>
@@ -598,7 +601,8 @@
         <nav class="bg-luxury-card border-b border-luxury-border py-4 px-6 md:px-10 flex justify-between items-center shadow-lg">
             <div class="flex items-center">
                 <i data-lucide="shield-check" class="h-6 w-6 text-luxury-gold mr-3"></i>
-                <span class="font-serif font-bold text-xl tracking-widest uppercase">Panel Admin KoPi tiAm oMa NUR</span>
+                <!-- Dihapus class uppercase agar besar kecilnya sesuai teks -->
+                <span class="font-serif font-bold text-xl tracking-widest">Panel Admin KoPi tiAm oMa NUR</span>
             </div>
             <div class="flex items-center gap-4">
                 <div id="refresh-status" class="text-[10px] text-luxury-muted uppercase tracking-widest flex items-center hidden">
@@ -715,8 +719,15 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     
     <script>
+        // Pastikan posisi scroll di atas saat memuat ulang halaman
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        window.scrollTo(0, 0);
+
         // === 1. LOGIKA PRELOADER ===
         window.addEventListener('load', () => {
+            window.scrollTo(0, 0); // Kunci posisi scroll ke paling atas
             const preloader = document.getElementById('preloader');
             setTimeout(() => {
                 preloader.style.opacity = '0';
