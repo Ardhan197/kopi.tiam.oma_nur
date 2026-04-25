@@ -119,8 +119,7 @@
         }
 
         /* Star Rating Interaktif */
-        .star-icon { transition: all 0.2s; }
-        .star-icon.active { fill: #D4AF37; color: #D4AF37; }
+        .star-icon { transition: all 0.3s ease; }
     </style>
 </head>
 <body class="antialiased selection:bg-luxury-gold selection:text-black">
@@ -522,12 +521,24 @@
                     
                     <div class="flex flex-col items-center justify-center mb-6">
                         <span class="text-luxury-cream text-sm mb-3">Bagaimana pengalaman Anda?</span>
+                        
+                        <!-- WADAH BINTANG YANG SUDAH DIBUNGKUS BUTTON AGAR TIDAK BUG -->
                         <div class="flex gap-2" id="star-rating-container">
-                            <i data-lucide="star" data-value="1" class="w-8 h-8 text-luxury-muted cursor-pointer hover:text-luxury-gold transition-colors star-icon interactive-element"></i>
-                            <i data-lucide="star" data-value="2" class="w-8 h-8 text-luxury-muted cursor-pointer hover:text-luxury-gold transition-colors star-icon interactive-element"></i>
-                            <i data-lucide="star" data-value="3" class="w-8 h-8 text-luxury-muted cursor-pointer hover:text-luxury-gold transition-colors star-icon interactive-element"></i>
-                            <i data-lucide="star" data-value="4" class="w-8 h-8 text-luxury-muted cursor-pointer hover:text-luxury-gold transition-colors star-icon interactive-element"></i>
-                            <i data-lucide="star" data-value="5" class="w-8 h-8 text-luxury-muted cursor-pointer hover:text-luxury-gold transition-colors star-icon interactive-element"></i>
+                            <button type="button" data-value="1" class="star-btn interactive-element focus:outline-none transition-transform hover:scale-110">
+                                <i data-lucide="star" class="w-8 h-8 text-luxury-muted star-icon pointer-events-none"></i>
+                            </button>
+                            <button type="button" data-value="2" class="star-btn interactive-element focus:outline-none transition-transform hover:scale-110">
+                                <i data-lucide="star" class="w-8 h-8 text-luxury-muted star-icon pointer-events-none"></i>
+                            </button>
+                            <button type="button" data-value="3" class="star-btn interactive-element focus:outline-none transition-transform hover:scale-110">
+                                <i data-lucide="star" class="w-8 h-8 text-luxury-muted star-icon pointer-events-none"></i>
+                            </button>
+                            <button type="button" data-value="4" class="star-btn interactive-element focus:outline-none transition-transform hover:scale-110">
+                                <i data-lucide="star" class="w-8 h-8 text-luxury-muted star-icon pointer-events-none"></i>
+                            </button>
+                            <button type="button" data-value="5" class="star-btn interactive-element focus:outline-none transition-transform hover:scale-110">
+                                <i data-lucide="star" class="w-8 h-8 text-luxury-muted star-icon pointer-events-none"></i>
+                            </button>
                         </div>
                         <input type="hidden" name="rating" id="rating-input" value="" required>
                     </div>
@@ -792,7 +803,7 @@
         const cursor = document.getElementById('custom-cursor');
         const cursorDot = document.getElementById('custom-cursor-dot');
         const updateCursorElements = () => {
-            const interactiveElements = document.querySelectorAll('a, button, .interactive-element, .star-icon');
+            const interactiveElements = document.querySelectorAll('a, button, .interactive-element');
             if (window.matchMedia("(pointer: fine)").matches) {
                 document.addEventListener('mousemove', (e) => {
                     cursor.style.left = e.clientX + 'px';
@@ -802,7 +813,6 @@
                 });
 
                 interactiveElements.forEach(el => {
-                    // Prevent multiple bindings
                     el.removeEventListener('mouseenter', handleMouseEnter);
                     el.removeEventListener('mouseleave', handleMouseLeave);
                     
@@ -937,22 +947,62 @@
         // URL GOOGLE APPS SCRIPT
         const scriptURL = 'https://script.google.com/macros/s/AKfycbwcqBMrRCunknC0PoaQmthdg1wj2C1OSP68qGwNO9lqGp_XsseMKh08g5Beb82q4CYPxA/exec'; 
 
-        // === 8. LOGIKA RATING BINTANG & FORM ULASAN ===
-        const starIcons = document.querySelectorAll('.star-icon');
+        // === 8. LOGIKA RATING BINTANG & FORM ULASAN (BUG FIXED) ===
+        const starBtns = document.querySelectorAll('.star-btn');
         const ratingInput = document.getElementById('rating-input');
         
-        starIcons.forEach(star => {
-            star.addEventListener('click', function() {
-                const value = this.getAttribute('data-value');
+        starBtns.forEach(btn => {
+            // Efek Hover yang mulus (Premium UX)
+            btn.addEventListener('mouseenter', function() {
+                const hoverValue = parseInt(this.getAttribute('data-value'));
+                const currentValue = parseInt(ratingInput.value) || 0;
+                
+                starBtns.forEach(b => {
+                    const starVal = parseInt(b.getAttribute('data-value'));
+                    const icon = b.querySelector('.star-icon');
+                    
+                    if (starVal <= hoverValue) {
+                        icon.classList.add('text-luxury-gold');
+                        icon.classList.remove('text-luxury-muted');
+                    } else if (starVal > currentValue) {
+                        icon.classList.remove('text-luxury-gold');
+                        icon.classList.add('text-luxury-muted');
+                    }
+                });
+            });
+
+            btn.addEventListener('mouseleave', function() {
+                const currentValue = parseInt(ratingInput.value) || 0;
+                
+                starBtns.forEach(b => {
+                    const starVal = parseInt(b.getAttribute('data-value'));
+                    const icon = b.querySelector('.star-icon');
+                    
+                    if (starVal <= currentValue) {
+                        icon.classList.add('text-luxury-gold', 'fill-current');
+                        icon.classList.remove('text-luxury-muted');
+                    } else {
+                        icon.classList.remove('text-luxury-gold', 'fill-current');
+                        icon.classList.add('text-luxury-muted');
+                    }
+                });
+            });
+
+            // Logika Klik
+            btn.addEventListener('click', function() {
+                const value = parseInt(this.getAttribute('data-value'));
                 ratingInput.value = value;
                 
-                // Hapus aktif dari semua
-                starIcons.forEach(s => s.classList.remove('active', 'fill-[#D4AF37]'));
-                
-                // Tambahkan aktif sampai bintang yang diklik
-                starIcons.forEach(s => {
-                    if(s.getAttribute('data-value') <= value) {
-                        s.classList.add('active', 'fill-[#D4AF37]');
+                starBtns.forEach(b => {
+                    const starVal = parseInt(b.getAttribute('data-value'));
+                    const icon = b.querySelector('.star-icon'); 
+                    
+                    if (starVal <= value) {
+                        icon.classList.remove('text-luxury-muted');
+                        icon.classList.add('text-luxury-gold', 'fill-current');
+                    } else {
+                        icon.classList.remove('text-luxury-gold', 'fill-current');
+                        icon.classList.add('text-luxury-muted');
                     }
                 });
             });
@@ -988,7 +1038,13 @@
                         
                         showToast("Terima kasih! Ulasan Anda telah berhasil disimpan.", "success");
                         this.reset();
-                        starIcons.forEach(s => s.classList.remove('active', 'fill-[#D4AF37]'));
+                        
+                        // Kembalikan bintang ke keadaan semula
+                        starBtns.forEach(b => {
+                            const icon = b.querySelector('.star-icon');
+                            icon.classList.remove('text-luxury-gold', 'fill-current');
+                            icon.classList.add('text-luxury-muted');
+                        });
                         ratingInput.value = "";
                         
                         setTimeout(() => {
@@ -1101,23 +1157,19 @@
 
             try {
                 const formData = new FormData();
-                // Flag untuk backend Google Script agar mengembalikan data dashboard
                 formData.append('form_type', 'get_dashboard_data'); 
                 
                 const response = await fetch(scriptURL, { method: 'POST', body: formData });
                 const resultData = await response.json();
 
-                // Cek jika Apps Script merespon struktur JSON dengan 'success' 
                 if (resultData && resultData.result === 'success' && resultData.data) {
                     renderDashboardData(resultData.data);
                 } else {
-                    // Jika belum terkonfigurasi di backend Apps Script, gunakan fallback data Dummy
                     throw new Error("Backend belum mengembalikan data realtime, menampilkan fallback dummy.");
                 }
 
             } catch (error) {
                 console.warn(error);
-                // --- FALLBACK DATA DUMMY JIKA SCRIPT GOOGLE BELUM DIKONFIGURASI ---
                 renderDashboardData({
                     totalReservasi: Math.floor(Math.random() * 10) + 40,
                     totalUlasan: Math.floor(Math.random() * 5) + 15,
@@ -1142,7 +1194,7 @@
             document.getElementById('stat-menunggu').textContent = data.totalMenunggu || 0;
 
             const tbody = document.getElementById('table-reservasi-body');
-            tbody.innerHTML = ''; // Kosongkan tabel
+            tbody.innerHTML = ''; 
 
             if (data.dataTerbaru && data.dataTerbaru.length > 0) {
                 data.dataTerbaru.forEach(row => {
@@ -1184,7 +1236,6 @@
                 window.scrollTo(0,0);
                 showToast("Anda telah keluar dari Panel Admin.", "success");
                 
-                // Hentikan interval realtime
                 if(dashboardInterval) clearInterval(dashboardInterval);
             });
         }
