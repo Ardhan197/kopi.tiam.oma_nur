@@ -116,10 +116,12 @@
 </head>
 <body class="antialiased selection:bg-luxury-gold selection:text-black">
 
+    <!-- PRELOADER DENGAN LOGO DINAMIS -->
     <div id="preloader" class="fixed inset-0 z-[1000] bg-luxury-dark flex flex-col items-center justify-center">
         <div class="relative w-24 h-24 mb-8">
             <div class="absolute inset-0 border-t-2 border-luxury-gold rounded-full animate-spin"></div>
-            <i data-lucide="coffee" class="absolute inset-0 m-auto w-8 h-8 text-luxury-gold animate-pulse"></i>
+            <!-- Menggunakan default ikon kopi SVG Base64, nanti akan direplace dengan Logo URL -->
+            <img id="logo-preloader" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23D4AF37' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10 2v2'/%3E%3Cpath d='M14 2v2'/%3E%3Cpath d='M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1'/%3E%3Cpath d='M6 2v2'/%3E%3C/svg%3E" class="absolute inset-0 m-auto w-10 h-10 object-contain animate-pulse" alt="Logo">
         </div>
         <h1 class="font-serif text-2xl md:text-4xl text-luxury-cream tracking-[0.2em] mb-4 text-center px-4">KoPi tiAm oMa NUR</h1>
         <p class="text-luxury-gold text-xs md:text-sm tracking-[0.5em] uppercase opacity-70">Menyeduh Kesempurnaan</p>
@@ -146,7 +148,7 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between items-center h-16 bg-black/40 backdrop-blur-md border border-luxury-border rounded-full px-6 md:px-10 shadow-[0_0_30px_rgba(0,0,0,0.5)]">
                     <div class="flex-shrink-0 flex items-center cursor-pointer interactive-element" onclick="window.scrollTo(0,0)">
-                        <i data-lucide="coffee" class="h-6 w-6 text-luxury-gold mr-3"></i>
+                        <img id="logo-navbar" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23D4AF37' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10 2v2'/%3E%3Cpath d='M14 2v2'/%3E%3Cpath d='M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1'/%3E%3Cpath d='M6 2v2'/%3E%3C/svg%3E" class="h-6 w-6 mr-3 object-contain" alt="Logo">
                         <span class="font-serif font-bold text-lg md:text-xl text-luxury-cream tracking-widest">KoPi tiAm oMa NUR</span>
                     </div>
                     
@@ -283,7 +285,6 @@
                     <button class="filter-btn interactive-element bg-transparent text-luxury-cream border border-luxury-border hover:border-luxury-gold px-8 py-3 rounded-full text-sm font-semibold tracking-widest uppercase transition-all" data-filter="camilan">Patisserie</button>
                 </div>
 
-                <!-- DATA MENU AKAN DI RENDER DISINI DARI GOOGLE SHEETS -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10" id="menu-grid">
                     <div class="col-span-full text-center py-12 text-luxury-muted">
                         <i data-lucide="loader" class="w-8 h-8 animate-spin mx-auto mb-4 text-luxury-gold"></i>
@@ -300,7 +301,6 @@
                     <h2 class="text-4xl md:text-6xl font-bold text-luxury-cream font-serif mb-4">Galeri KoPi tiAm oMa NUR</h2>
                 </div>
 
-                <!-- DATA GALERI AKAN DI RENDER DISINI DARI GOOGLE SHEETS -->
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6" id="gallery-grid">
                     <div class="col-span-full text-center py-12 text-luxury-muted">
                         <i data-lucide="loader" class="w-8 h-8 animate-spin mx-auto mb-4 text-luxury-gold"></i>
@@ -451,7 +451,7 @@
 
         <footer class="bg-[#030202] text-luxury-muted py-12 border-t border-[#1a1514]">
             <div class="max-w-7xl mx-auto px-4 flex flex-col items-center">
-                <i data-lucide="coffee" class="h-8 w-8 text-luxury-gold mb-6"></i>
+                <img id="logo-footer" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23D4AF37' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10 2v2'/%3E%3Cpath d='M14 2v2'/%3E%3Cpath d='M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1'/%3E%3Cpath d='M6 2v2'/%3E%3C/svg%3E" class="h-10 w-10 mb-4 object-contain" alt="Logo">
                 <span class="font-serif text-xl md:text-2xl text-luxury-cream tracking-[0.2em] mb-8 text-center">KoPi tiAm oMa NUR</span>
                 
                 <div class="flex space-x-8 mb-10">
@@ -563,8 +563,13 @@
 
             <!-- PENGATURAN VISUAL / GAMBAR -->
             <div class="bg-luxury-card border border-luxury-border rounded-2xl overflow-hidden mb-12 p-6 md:p-8">
-                <h3 class="font-serif text-xl md:text-2xl text-luxury-cream mb-6">Pengaturan Gambar Latar Utama</h3>
-                <div class="space-y-4 max-w-2xl">
+                <h3 class="font-serif text-xl md:text-2xl text-luxury-cream mb-6">Pengaturan Visual & Identitas</h3>
+                <div class="space-y-6 max-w-2xl">
+                    <div>
+                        <label class="text-luxury-muted text-xs uppercase tracking-widest mb-2 block">Tautan (URL) Logo Website</label>
+                        <input type="text" id="input-logo-image" class="w-full bg-transparent border-b border-luxury-border py-3 text-luxury-cream focus:border-luxury-gold transition-colors outline-none" placeholder="Masukkan link gambar logo (https://...)">
+                        <p class="text-[10px] text-luxury-muted mt-2">Logo ini akan muncul pada menu navigasi atas, bagian bawah (footer), dan animasi putaran saat web pertama kali memuat.</p>
+                    </div>
                     <div>
                         <label class="text-luxury-muted text-xs uppercase tracking-widest mb-2 block">Tautan (URL) Gambar Latar / Hero</label>
                         <input type="text" id="input-hero-image" class="w-full bg-transparent border-b border-luxury-border py-3 text-luxury-cream focus:border-luxury-gold transition-colors outline-none" placeholder="Masukkan link gambar (https://...)">
@@ -572,7 +577,7 @@
                     <div>
                         <label class="text-luxury-muted text-xs uppercase tracking-widest mb-2 block">Tautan (URL) Gambar Tentang Kami</label>
                         <input type="text" id="input-about-image" class="w-full bg-transparent border-b border-luxury-border py-3 text-luxury-cream focus:border-luxury-gold transition-colors outline-none" placeholder="Masukkan link gambar (https://...)">
-                        <p class="text-[10px] text-luxury-muted mt-2">Gambar ini akan langsung mengubah latar belakang halaman awal website dan gambar di bagian cerita. Pengaturan gambar Menu dan Galeri dilakukan langsung di tab Google Sheets Anda.</p>
+                        <p class="text-[10px] text-luxury-muted mt-2">Pengaturan gambar Menu dan Galeri dilakukan secara terpisah di bawah ini atau melalui tab Google Sheets Anda.</p>
                     </div>
                     <button id="btn-save-visuals" class="interactive-element px-8 py-3 bg-luxury-gold text-black rounded-full font-semibold uppercase tracking-widest text-xs transition-transform hover:scale-105 mt-4 flex items-center justify-center">
                         Simpan Visual
@@ -677,18 +682,27 @@
         if ('scrollRestoration' in history) {
             history.scrollRestoration = 'manual';
         }
-        window.scrollTo(0, 0);
 
-        // === 1. LOGIKA PRELOADER ===
+        // ==========================================
+        // === LOGIKA SMART PRELOADER ===
+        // ==========================================
+        let preloaderHidden = false;
+        function hidePreloader() {
+            if(preloaderHidden) return;
+            preloaderHidden = true;
+            const preloader = document.getElementById('preloader');
+            if(preloader) {
+                preloader.style.opacity = '0';
+                setTimeout(() => { preloader.style.visibility = 'hidden'; }, 1000);
+            }
+        }
+        
         window.addEventListener('load', () => {
             window.scrollTo(0, 0); 
-            const preloader = document.getElementById('preloader');
-            setTimeout(() => {
-                preloader.style.opacity = '0';
-                setTimeout(() => {
-                    preloader.style.visibility = 'hidden';
-                }, 1000);
-            }, 1500); 
+            // Inisiasi pengambilan data segera setelah window termuat
+            initializeWebsite(); 
+            // Backup fungsi jika koneksi sangat lambat, paksa matikan preloader setelah 6 detik
+            setTimeout(hidePreloader, 6000); 
         });
 
         // === 2. SMOOTH SCROLLING (LENIS) ===
@@ -822,7 +836,6 @@
         });
 
         // === 7. LOGIKA FILTER MENU (Update untuk elemen dinamis) ===
-        // Karena elemen dirender oleh javascript, kita butuh filter event dinamis
         const filterBtns = document.querySelectorAll('.filter-btn');
 
         filterBtns.forEach(btn => {
@@ -836,7 +849,7 @@
                 btn.classList.add('bg-luxury-gold', 'text-black', 'shadow-[0_0_15px_rgba(212,175,55,0.3)]');
 
                 const filterValue = btn.getAttribute('data-filter');
-                const menuItems = document.querySelectorAll('.menu-item'); // Get current elements
+                const menuItems = document.querySelectorAll('.menu-item'); 
 
                 menuItems.forEach(item => {
                     if (filterValue === 'all') {
@@ -891,27 +904,38 @@
                     // 1. Update Visitor Count
                     visitorElement.textContent = result.count || "-";
                     
-                    // 2. Munculkan Kata Motivasi
+                    // 2. Set Gambar Logo Website Dinamis
+                    if (result.logo_image) {
+                        const logoElements = ['logo-preloader', 'logo-navbar', 'logo-footer'];
+                        logoElements.forEach(id => {
+                            const el = document.getElementById(id);
+                            if (el) el.src = result.logo_image;
+                        });
+                        const inputAdminLogo = document.getElementById('input-logo-image');
+                        if (inputAdminLogo) inputAdminLogo.value = result.logo_image;
+                    }
+
+                    // 3. Munculkan Kata Motivasi
                     if (result.motivation_active === true && result.quote) {
                         document.getElementById('motivation-text').textContent = `"${result.quote}"`; 
                         setTimeout(showMotivation, 500); 
                     }
 
-                    // 3. Set Gambar Latar (Hero Image)
+                    // 4. Set Gambar Latar (Hero Image)
                     if (result.hero_image) {
                         document.getElementById('hero-img').src = result.hero_image;
                         const inputAdminHero = document.getElementById('input-hero-image');
                         if (inputAdminHero) inputAdminHero.value = result.hero_image;
                     }
                     
-                    // 3.5 Set Gambar Tentang Kami (About Image)
+                    // 5. Set Gambar Tentang Kami (About Image)
                     if (result.about_image) {
                         document.getElementById('about-img').src = result.about_image;
                         const inputAdminAbout = document.getElementById('input-about-image');
                         if (inputAdminAbout) inputAdminAbout.value = result.about_image;
                     }
 
-                    // 4. Render Menu dari Google Sheets
+                    // 6. Render Menu dari Google Sheets
                     const menuGrid = document.getElementById('menu-grid');
                     if (result.menu_data && result.menu_data.length > 0) {
                         menuGrid.innerHTML = '';
@@ -920,7 +944,6 @@
                             let iconColor = 'text-luxury-gold';
                             let borderColor = 'border-luxury-gold';
                             
-                            // Normalisasi teks kategori untuk icon
                             const cat = item.kategori.toLowerCase();
                             if (cat.includes('non-kopi')) {
                                 iconName = 'leaf'; iconColor = 'text-green-500'; borderColor = 'border-green-500';
@@ -954,14 +977,14 @@
                         menuGrid.innerHTML = `<div class="col-span-full text-center py-8 text-luxury-muted">Menu belum tersedia.</div>`;
                     }
 
-                    // 5. Render Galeri dari Google Sheets
+                    // 7. Render Galeri dari Google Sheets
                     const galleryGrid = document.getElementById('gallery-grid');
                     if (result.gallery_data && result.gallery_data.length > 0) {
                         galleryGrid.innerHTML = '';
                         result.gallery_data.forEach((url, index) => {
                             let extraClass = '';
                             let overlay = '';
-                            if (index === 0) { // Membuat gambar pertama besar
+                            if (index === 0) { 
                                 extraClass = 'col-span-2 row-span-2';
                                 overlay = '<div class="absolute inset-0 bg-luxury-dark/20 group-hover:bg-transparent transition-colors z-10 duration-700"></div>';
                             }
@@ -990,19 +1013,17 @@
             } catch(e) {
                 console.warn("Gagal memuat data dari server", e);
                 visitorElement.textContent = "-";
+            } finally {
+                // Sembunyikan animasi loading HANYA setelah semua data masuk dan gambar dimuat
+                hidePreloader();
             }
         }
-        
-        // Panggil saat website load (delay agar tidak crash dgn preloader)
-        window.addEventListener('DOMContentLoaded', () => {
-            setTimeout(initializeWebsite, 1500);
-        });
 
-
-        // === SIMPAN VISUAL HERO IMAGE DARI ADMIN ===
+        // === SIMPAN VISUAL / LOGO DARI ADMIN ===
         const btnSaveVisuals = document.getElementById('btn-save-visuals');
         if(btnSaveVisuals) {
             btnSaveVisuals.addEventListener('click', async () => {
+                const logoUrl = document.getElementById('input-logo-image').value;
                 const heroUrl = document.getElementById('input-hero-image').value;
                 const aboutUrl = document.getElementById('input-about-image').value;
                 const originalText = btnSaveVisuals.innerHTML;
@@ -1013,6 +1034,7 @@
 
                 const formData = new FormData();
                 formData.append('form_type', 'update_visuals');
+                formData.append('logo_image', logoUrl);
                 formData.append('hero_image', heroUrl);
                 formData.append('about_image', aboutUrl);
 
@@ -1021,9 +1043,16 @@
                     const result = await response.json();
                     
                     if(result.result === 'success') {
-                        showToast("Visual berhasil diperbarui. Gambar website telah diganti.", "success");
+                        showToast("Visual berhasil diperbarui.", "success");
                         if(heroUrl) document.getElementById('hero-img').src = heroUrl;
                         if(aboutUrl) document.getElementById('about-img').src = aboutUrl;
+                        if(logoUrl) {
+                            const logoElements = ['logo-preloader', 'logo-navbar', 'logo-footer'];
+                            logoElements.forEach(id => {
+                                const el = document.getElementById(id);
+                                if (el) el.src = logoUrl;
+                            });
+                        }
                     } else {
                         showToast("Gagal menyimpan visual", "error");
                     }
