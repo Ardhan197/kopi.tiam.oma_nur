@@ -225,7 +225,7 @@
                     <div class="lg:w-1/2 relative" data-aos="fade-right" data-aos-duration="1500">
                         <div class="absolute -inset-4 border border-luxury-gold/20 rounded-t-full rounded-b-3xl transform -rotate-3"></div>
                         <div class="relative rounded-t-full rounded-b-3xl overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.8)]">
-                            <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80" alt="Pembuatan Kopi" class="w-full h-[600px] object-cover transition-transform duration-1000 hover:scale-110" />
+                            <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80" alt="Pembuatan Kopi" class="w-full h-[600px] object-cover transition-transform duration-1000 hover:scale-110" id="about-img" />
                             <div class="absolute inset-0 bg-gradient-to-t from-luxury-dark via-transparent to-transparent"></div>
                             <div class="absolute bottom-10 left-0 right-0 text-center">
                                 <p class="font-serif text-4xl text-luxury-gold italic">Sejak 2024</p>
@@ -568,7 +568,11 @@
                     <div>
                         <label class="text-luxury-muted text-xs uppercase tracking-widest mb-2 block">Tautan (URL) Gambar Latar / Hero</label>
                         <input type="text" id="input-hero-image" class="w-full bg-transparent border-b border-luxury-border py-3 text-luxury-cream focus:border-luxury-gold transition-colors outline-none" placeholder="Masukkan link gambar (https://...)">
-                        <p class="text-[10px] text-luxury-muted mt-2">Gambar ini akan langsung mengubah latar belakang halaman awal website.</p>
+                    </div>
+                    <div>
+                        <label class="text-luxury-muted text-xs uppercase tracking-widest mb-2 block">Tautan (URL) Gambar Tentang Kami</label>
+                        <input type="text" id="input-about-image" class="w-full bg-transparent border-b border-luxury-border py-3 text-luxury-cream focus:border-luxury-gold transition-colors outline-none" placeholder="Masukkan link gambar (https://...)">
+                        <p class="text-[10px] text-luxury-muted mt-2">Gambar ini akan langsung mengubah latar belakang halaman awal website dan gambar di bagian cerita. Pengaturan gambar Menu dan Galeri dilakukan langsung di tab Google Sheets Anda.</p>
                     </div>
                     <button id="btn-save-visuals" class="interactive-element px-8 py-3 bg-luxury-gold text-black rounded-full font-semibold uppercase tracking-widest text-xs transition-transform hover:scale-105 mt-4 flex items-center justify-center">
                         Simpan Visual
@@ -896,8 +900,15 @@
                     // 3. Set Gambar Latar (Hero Image)
                     if (result.hero_image) {
                         document.getElementById('hero-img').src = result.hero_image;
-                        const inputAdmin = document.getElementById('input-hero-image');
-                        if (inputAdmin) inputAdmin.value = result.hero_image;
+                        const inputAdminHero = document.getElementById('input-hero-image');
+                        if (inputAdminHero) inputAdminHero.value = result.hero_image;
+                    }
+                    
+                    // 3.5 Set Gambar Tentang Kami (About Image)
+                    if (result.about_image) {
+                        document.getElementById('about-img').src = result.about_image;
+                        const inputAdminAbout = document.getElementById('input-about-image');
+                        if (inputAdminAbout) inputAdminAbout.value = result.about_image;
                     }
 
                     // 4. Render Menu dari Google Sheets
@@ -993,6 +1004,7 @@
         if(btnSaveVisuals) {
             btnSaveVisuals.addEventListener('click', async () => {
                 const heroUrl = document.getElementById('input-hero-image').value;
+                const aboutUrl = document.getElementById('input-about-image').value;
                 const originalText = btnSaveVisuals.innerHTML;
                 
                 btnSaveVisuals.innerHTML = `<i data-lucide="loader" class="w-4 h-4 animate-spin inline mr-2"></i> Menyimpan...`;
@@ -1002,14 +1014,16 @@
                 const formData = new FormData();
                 formData.append('form_type', 'update_visuals');
                 formData.append('hero_image', heroUrl);
+                formData.append('about_image', aboutUrl);
 
                 try {
                     const response = await fetch(scriptURL, { method: 'POST', body: formData });
                     const result = await response.json();
                     
                     if(result.result === 'success') {
-                        showToast("Visual berhasil diperbarui. Latar utama web telah diganti.", "success");
+                        showToast("Visual berhasil diperbarui. Gambar website telah diganti.", "success");
                         if(heroUrl) document.getElementById('hero-img').src = heroUrl;
+                        if(aboutUrl) document.getElementById('about-img').src = aboutUrl;
                     } else {
                         showToast("Gagal menyimpan visual", "error");
                     }
